@@ -1,0 +1,116 @@
+@font-face {
+    font-family: 'RobotoRegular';
+    src: url('../fonts/RobotoRegular/RobotoRegular.eot');
+    src: url('../fonts/RobotoRegular/RobotoRegular.eot') format('embedded-opentype'),
+    url('../fonts/RobotoRegular/RobotoRegular.woff2') format('woff2'),
+    url('../fonts/RobotoRegular/RobotoRegular.woff') format('woff'),
+    url('../fonts/RobotoRegular/RobotoRegular.ttf') format('truetype'),
+    url('../fonts/RobotoRegular/RobotoRegular.svg#RobotoMedium') format('svg');
+}
+
+
+/* Roboto Google */
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-Black'),url('../fonts/Roboto/Roboto-Black.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-BlackItalic'),url('../fonts/Roboto/Roboto-BlackItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-Bold'),url('../fonts/Roboto/Roboto-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-BoldItalic'),url('../fonts/Roboto/Roboto-BoldItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-Hairline'),url('../fonts/Roboto/Roboto-Hairline.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-HairlineItalic'),url('../fonts/Roboto/Roboto-HairlineItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-Italic'),url('../fonts/Roboto/Roboto-Italic.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-Light'),url('../fonts/Roboto/Roboto-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-LightItalic'),url('../fonts/Roboto/Roboto-LightItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-Regular'),url('../fonts/Roboto/Roboto-Regular.ttf');
+}
+
+
+
+/* end */
+
+@font-face {
+    font-family: 'LatoBlack';
+    src: url('../fonts/Lato/Lato-Black.ttf');
+}
+
+@font-face {
+    font-family: 'LatoBlackItalic';
+    src: url('../fonts/Lato/Lato-BlackItalic.ttf');
+}
+
+@font-face {
+    font-family: 'LatoBold';
+    src: url('../fonts/Lato/Lato-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'LatoBoldItalic';
+    src: url('../fonts/Lato/Lato-BoldItalic.ttf');
+}
+
+@font-face {
+    font-family: 'LatoHairline';
+    src: url('../fonts/Lato/Lato-Hairline.ttf');
+}
+
+@font-face {
+    font-family: 'LatoHairlineItalic';
+    src: url('../fonts/Lato/Lato-HairlineItalic.ttf');
+}
+
+@font-face {
+    font-family: 'LatoItalic';
+    src: url('../fonts/Lato/Lato-Italic.ttf');
+}
+
+@font-face {
+    font-family: 'LatoLight';
+    src: url('../fonts/Lato/Lato-Light.ttf');
+}
+
+@font-face {
+    font-family: 'LatoLightItalic';
+    src: url('../fonts/Lato/Lato-LightItalic.ttf');
+}
+
+@font-face {
+    font-family: 'LatoRegular';
+    src: url('../fonts/Lato/Lato-Regular.ttf');
+}
