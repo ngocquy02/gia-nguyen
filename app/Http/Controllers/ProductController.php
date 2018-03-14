@@ -139,7 +139,7 @@ class ProductController extends Controller
         $product->Name            =     $request->Name; 
         $product->Alias           =     str_slug($request->Name);
         $product->CatId           =     $request->CatId;
-        $product->Price           =     $request->Price;
+        $product->Price           =     0;
         $product->Sale           =     0;
         $product->ShortContent            =     $request->short_content; 
         $product->Content            =     $request->content; 
@@ -147,7 +147,7 @@ class ProductController extends Controller
         $product->MetaDescription            =     $request->MetaDescription; 
         $product->MetaKeyword            =     $request->MetaKeyword; 
         $product->IsActive        =     ($request->IsActive == 'on') ? 1 : 0;
-        $product->IsHot           =     ($request->IsHot == 'on') ? 1 :0;
+        $product->IsHot           =     0;
         $product->IsHome          =     0;
         $product->Idx             =     $IdxMax;
         $product->Img             =     $file_name;
@@ -177,7 +177,7 @@ class ProductController extends Controller
             $product->Img             =     $file_name;
         }
         $product->Name            =     $request->Name; 
-        $product->Price            =     $request->Price; 
+        $product->Price            =     0; 
         $product->Sale            =     0; 
         $product->ShortContent            =     $request->short_content; 
         $product->Content            =     $request->content; 
@@ -185,7 +185,7 @@ class ProductController extends Controller
         $product->MetaDescription            =     $request->MetaDescription; 
         $product->MetaKeyword            =     $request->MetaKeyword; 
         $product->Alias           =     str_slug($request->Name);
-        $product->IsHot           =     ($request->IsHot == 'on')?1:0;
+        $product->IsHot           =    0;
         $product->IsActive        =     ($request->IsActive == 'on') ? 1 : 0;
         $product->IsHome            =    0;
         $product->UpdateBy        =     1;
@@ -208,7 +208,7 @@ class ProductController extends Controller
     {
         if ($request->ajax()) {
             $product =Product::find($request->id);
-            $product->IsHot        =     ($request->IsHot==0) ? 1 : 0;
+            $product->IsHot        =      0;
             $product->updated_at      =     new DateTime();
             $product->save();
             return ($product->IsHot == 1) ? 'on' : 'off';

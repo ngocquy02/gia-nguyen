@@ -5,7 +5,27 @@
 		    </url><url>
 								<loc>http://localhost/Admin-XJK/public/trang-chu</loc>
 							</url><url>
-								<loc>http://localhost/Admin-XJK/public/trang-chu/1</loc>
+								<loc>http://localhost/Admin-XJK/public/san-pham</loc>
 							</url><url>
-								<loc>http://localhost/Admin-XJK/public/trang-chu/1/2</loc>
-							</url></urlset>
+												<loc>http://localhost/Admin-XJK/public/san-pham/cap-1/trang-chu.html</loc>
+											</url><url>
+								<loc>http://localhost/Admin-XJK/public/san-pham/cap-1</loc>
+							</url><url>
+												<loc>http://localhost/Admin-XJK/public/san-pham/cap-1/trang-chu.html</loc>
+											</url><url>
+								<loc>http://localhost/Admin-XJK/public/san-pham/cap-1/cap-2</loc>
+							</url><url>
+												<loc>http://localhost/Admin-XJK/public/san-pham/cap-1/trang-chu.html</loc>
+											</url><url>
+								<loc>http://localhost/Admin-XJK/public/akjsdksdf</loc>
+							</url><url>
+												<loc>http://localhost/Admin-XJK/public/san-pham/cap-1/trang-chu.html</loc>
+											</url><url>
+								<loc>http://localhost/Admin-XJK/public/akjsdksdf/cap-1</loc>
+							</url><url>
+												<loc>http://localhost/Admin-XJK/public/san-pham/cap-1/trang-chu.html</loc>
+											</url><url>
+								<loc>http://localhost/Admin-XJK/public/akjsdksdf/cap-1/cap-2</loc>
+							</url><url>
+												<loc>http://localhost/Admin-XJK/public/san-pham/cap-1/trang-chu.html</loc>
+											</url></urlset>

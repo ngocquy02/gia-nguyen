@@ -47,9 +47,9 @@
                     <thead class="bordered-darkorange">
                         <tr role="row">
                             <th>Tên</th>
+                            <th>Hình ảnh</th>
                             <th>Ẩn/ Hiện</th>
-                            <th>Loại dịch vụ</th>
-                            <th>Loại chiều</th>
+                            {{-- <th>Loại chiều</th> --}}
                             <th>Thao tác</th>
                         </tr>
                     </thead>
@@ -58,18 +58,18 @@
                         @foreach($items as $item)
                         <tr id="{{$item->id}}" class="getId">
                             <td class=" sorting_1">{{ $item->Name}}</td>
+                            <td class="center ">
+                                <img src="{{$item->Img}}" style="width:200px">
+                            </td>
                             <td class=" ">
                                 <label>
                                     <input class="checkbox-slider colored-blue" type="checkbox" @if($item->IsActive == 1) {{ 'checked="checked"'}} @endif>
                                     <span class="text IsActive" IsActive="{!!$item->IsActive!!}"></span>
                                 </label>
                             </td>
-                            <td class="center ">
-                                <label>{{($item->IsHot==0)? 'Du lịch' :'Vận tải'}}</label>
-                            </td>
-                            <td class="center ">
+                            {{-- <td class="center ">
                                 <label>{{($item->IsHome==0)? '1 Chiều' :'2 Chiều'}}</label>
-                            </td>
+                            </td> --}}
                             <td class="center ">
                                 <a href="{!!route('getProduct',['id'=>$item->id])!!}" class="btn btn-info btn-xs edit" title="Thay đổi thông tin sản phẩm" style="margin-left: 10px;margin-right: 10px;">
                                     <span class="fa fa-edit"></span>

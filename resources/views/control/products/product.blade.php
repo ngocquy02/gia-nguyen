@@ -78,34 +78,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <span ><strong>Giá </strong></span>
-                                <input type="number" name="Price" value="@if(isset($item)){{ $item->Price}}@endif" min="0" placeholder="Giá của sản phẩm" class="form-control">
-                                <div class="horizontal-space"></div>
-                            </div>
-                            {{-- <div class="col-md-6 ">
-                                <span ><strong>Số km</strong></span>
-                                <div class="radio">
-                                    <label>
-                                        <input name="Sale" type="radio" class="colored-blue" @if(isset($item) && $item->Sale ==30) checked="checked" @else checked="checked" @endif  value="30">
-                                        <span class="text"> Dưới 30</span>
-                                    </label>
-                                    <label>
-                                        <input name="Sale" type="radio" class="colored-danger" @if(isset($item) && $item->Sale ==150 && $item->Sale<=150) checked="checked" @endif  value="150">
-                                        <span class="text"> Dưới 150</span>
-                                    </label>
-                                    <label>
-                                        <input name="Sale" type="radio" class="colored-success" @if(isset($item) && $item->Sale ==300 && $item->Sale<=300) checked="checked" @endif  value="300">
-                                        <span class="text"> Dưới 300</span>
-                                    </label>
-                                    <label>
-                                        <input name="Sale" type="radio" class="colored-blueberry" @if(isset($item) && $item->Sale ==301) checked="checked" @endif  value="301">
-                                        <span class="text"> Trên 300 </span>
-                                    </label>
-                                </div>
-                            </div> --}}
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <span ><strong>Hiện sản phẩm</strong> &nbsp&nbsp&nbsp</span>
                                 <label style="margin-top: 10px;">
@@ -113,26 +85,6 @@
                                     <span class="text"></span>
                                 </label>
                             </div>
-                             <div class="col-md-4">
-                                <span ><strong>Nổi bật</strong> </span>
-                                <label>
-                                    <input class="checkbox-slider slider-icon colored-blue" @if(isset($item) && $item->IsHot ==1) {{'checked="checked"'}} @endif type="checkbox" name="IsHot">
-                                    <span class="text"></span>
-                                </label>
-                            </div>
-                            {{-- <div class="col-md-4 ">
-                                <span ><strong>Loại chiều</strong> </span>
-                                <div class="radio">
-                                    <label>
-                                        <input name="IsHome" type="radio" class="colored-blue" @if(isset($item) && $item->IsHome ==0) checked="checked" @else checked="checked" @endif  value="0">
-                                        <span class="text"> 1 chiều</span>
-                                    </label>
-                                     <label>
-                                        <input name="IsHome" type="radio" class="colored-danger" @if(isset($item) && $item->IsHome ==1) checked="checked" @endif  value="1">
-                                        <span class="text"> 2 chiều</span>
-                                    </label>
-                                </div>
-                            </div>  --}}
                         </div>
                         <div class="row">
                             <div class="col-md-6">

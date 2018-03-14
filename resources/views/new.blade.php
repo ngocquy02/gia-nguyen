@@ -7,16 +7,17 @@
                 <div class="header-name">
                     <h2 class="m-0 p-0">
                         <a href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" title="">
+                            TRANG CHỦ &#x3E;
                             @if($check)
                                 {!!$check->Name!!}
                             @endif
                             @if(isset($checkParent))
-                                {!!$checkParent->Name!!}
+                                 &#x3E; {!!$checkParent->Name!!}
                             @endif
                             @if(isset($checkChild))
-                                {!!$checkChild->Name!!}
+                                 &#x3E; {!!$checkChild->Name!!}
                             @endif
-                            > {!!$item->Name!!}
+                             &#x3E; {!!$item->Name!!}
                         </a>
                     </h2>
                 </div>
@@ -52,8 +53,8 @@
                             <img src="{{$value->Img}}" class="img-fluid" alt="Responsive image">
                         </div>
                         <div class="product-name">
-                            <h3><a href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" title="">{{$value->Name}}</a></h3>
-                            <div class="xem-them"><a href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" title="">Xem thêm</a></div>
+                            <h3><a href="{{getLinkById($item->CatId)}}/{{$value->Alias}}.html" title="">{{$value->Name}}</a></h3>
+                            <div class="xem-them"><a href="{{getLinkById($item->CatId)}}/{{$value->Alias}}.html" title="">Xem thêm</a></div>
                         </div>
                     </div>
                 @endforeach

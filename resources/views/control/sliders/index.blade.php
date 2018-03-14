@@ -108,7 +108,8 @@
                 <table class="table table-bordered table-hover table-striped" id="searchable">
                     <thead class="bordered-darkorange">
                         <tr role="row">
-                            <th class="sorting_asc">Hình ảnh</th>
+                            <th class="sorting_asc">Tên</th>
+                            <th class="">Hình ảnh</th>
                             <th>Ẩn/ Hiện</th>
                             <th>Thao tác</th>
                         </tr>
@@ -117,7 +118,8 @@
                     @if(count($items)>0)
                         @foreach($items as $item)
                         <tr id="{{$item->id}}" class="getId">
-                            <td class="center sorting_1"><img style="width: 200px" src='{{$item->Img}}'></td>
+                            <td class="sorting_1">{{$item->Name}}</td>
+                            <td class="center"><img style="width: 200px" src='{{$item->Img}}'></td>
                             <td>
                                 <label>
                                     <input class="checkbox-slider colored-blue" type="checkbox" @if($item->IsActive == 1) {{ 'checked="checked"'}} @endif>

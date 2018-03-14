@@ -1,88 +1,89 @@
 @extends('layouts.master')
 @section('content')
-
-<!-- End Main Breadcrumb -->
-<!-- Main Content -->
-<div class="main-content">
-     <div class="container-fluid">
+<div class="list-sp">
+    <div class="header-list-sp">
         <div class="row">
-            <div class="header-name">
-                <h1>{!!$RootName!!}</h1>
+            <div class="col-xs-12 col-sm-6 col-md-9 col-lg-9">
+                <div class="header-name">
+                    <h2 class="m-0 p-0">
+                        <a href="" title="">
+                             TRANG CHỦ &#x3E;
+                            @if(isset($RootName))
+                                {{$RootName}}
+                            @endif
+                            @if(isset($checkParent))
+                                 &#x3E; {{$checkParent}}
+                            @endif
+                            @if(isset($checkChild))
+                                &#x3E; {{$checkChild}}
+                            @endif
+
+                        </a>
+                    </h2>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                @if($items->count() > 0)
-                        @foreach($items as $item)
-                            <div class="post-slide row">
-                                <div class="post-img col-md-5 col-lg-5 col-xs-12 col-sm-12"><a href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" title="{{$item->Name}}"><img src="{{$item->Img}}" alt=""></a></div>
-                                <div class="post-content col-md-7 col-lg-7 col-xs-12 col-sm-12">
-                                    <h3 class="post-title"><a href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" title="{{$item->Name}}">{{$item->Name}}</a></h3>
-                                    <ul class="post-bar">
-                                        <li><i class="fa fa-calendar"></i> {!!$item->created_at->format('d/m/Y h:s')!!}</li>
-                                    </ul>
-                                    <p class="post-description">{!!catchuoi(strip_tags($item->ShortContent),150)!!}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    @else
-                    <code> Bài viết đang cập nhật</code>
-                    @endif
-                <div class="row">
-                    <div class="col-md-12">
-                        <nav>
-                            {!!$items->links()!!}
-                        </nav>
-                    </div>
+    <div class="clearfix"></div>
+    <div class="list-news">
+        @foreach($items as $item)
+            @if($item->IsActive == 1)
+            <div class="item-new row ml-0 mr-0">
+                <div class="col-md-4 col-lg-4 pl-0">
+                      <img src="{{ asset('') }}/{{$item->Img}}" class="img-fluid" alt="{{$item->Name}}">
+                </div>
+                <div class="col-md-8 col-lg-8">
+                    <a href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" title="{{$item->Name}}"><h3 class="name-news">{{$item->Name}}</h3></a>
+                    <p>{!!$item->ShortContent!!}</p>
+                    <a href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" title="Xem chi tiết" class="float-right news-detail"> Xem chi tiết</a>
                 </div>
             </div>
-            <div class="col-md-3" style="padding: 0;">
-                 <div class="blog-new">
-                    <h2 class="blog-heading">DỊCH VỤ</h2>
-                    <div class="blog-new-content">
-                        <ul>
-                        @php
-                            $listDVNews=App\Models\Category::where(['IsActive'=>1,'Alias'=>'dich-vu','Type'=>3])->first();
-                        @endphp
-                        @if($listDVNews and $listDVNews->categorys()->where('IsActive',1)->count() > 0)
-                            @foreach($listDVNews->categorys()->where('IsActive',1)->orderby('Idx')->get() as $listDVNew)
-                            <li>
-                                <h3 style="margin: 0;"><a class="bn-img" href="{!!getLinkById($listDVNew->id)!!}/" title="{!!$listDVNew->Name!!}">{!!$listDVNew->Name!!}
-                                </a></h3>
-                                <p class="description">{{$listDVNew->Description}}</p>
-                            </li>
-                            @endforeach
-                        @else
-                            <code>Bài viết đang cập nhật</code>
-                        @endif
-                        </ul>
-                    </div>
-                </div>
-                <div class="blog-new">
-                    <h2 class="blog-heading">Bài viết nổi bật</h2>
-                    <div class="blog-new-content-hot">
-                        <ul>
-                        @php
-                            $listArticleNews=App\Models\Article::where(['IsActive'=>1,'IsHot'=>1])->orderby('id')->limit(7)->get();
-                        @endphp
-                        @if($listArticleNews->count() > 0)
-                            @foreach($listArticleNews as $listArticleNew)
-                            <li>
-                                <h3><a class="arti-hot" href="{!!getLinkById($listArticleNew->CatId)!!}/{!!$listArticleNew->Alias!!}.html" title=""><i class="fa fa-long-arrow-right" aria-hidden="true"></i> {!!$listArticleNew->Name!!}
-                                </a></h3>
-                            </li>
-                            @endforeach
-                        @else
-                            <code>Bài viết đang cập nhật</code>
-                        @endif
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+            @endif
+        @endforeach
+        <div class="clearfix"></div>
+        @if ($items->lastPage() > 1)
+            <ul class="pagination float-right">
+                @if($items->currentPage() != 1 && $items->lastPage() >= 5)
+                    <li>
+                        <a href="{{ $items->url($items->url(1)) }}" aria-label="Previous">
+                            <span aria-hidden="true">Trang đầu</span>
+                        </a>
+                    </li>
+                @endif
+                @if($items->currentPage() != 1)
+                    <li>
+                        <a href="{{ $items->url($items->currentPage()-1) }}" aria-label="Previous">
+                            <span aria-hidden="true">&#x3C;&#x3C;</span>
+                        </a>
+                    </li>
+                @endif
+                @for($i = max($items->currentPage()-2, 1); $i <= min(max($items->currentPage()-2, 1)+4,$items->lastPage()); $i++)
+                @if($items->currentPage() == $i)
+                <li class="active">
+                @else
+                <li>
+                @endif
+                    <a href="{{ $items->url($i) }}">{{ $i }}</a>
+                </li>
+                @endfor
+                @if ($items->currentPage() != $items->lastPage())
+                    <li>
+                        <a href="{{ $items->url($items->currentPage()+1) }}" aria-label="Next">
+                            <span aria-hidden="true">&#x3E;&#x3E;</span>
+                        </a>
+                    </li>
+                @endif
+                @if ($items->currentPage() != $items->lastPage() && $items->lastPage() >= 5)
+                    <li>
+                        <a href="{{ $items->url($items->lastPage()) }}" aria-label="Next">
+                            <span aria-hidden="true">Trang cuối</span>
+                        </a>
+                    </li>
+                @endif
+            </ul>
+        @endif
     </div>
 </div>
-<!-- End Main Content -->
+
+
 @endsection

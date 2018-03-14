@@ -9,7 +9,7 @@
                 $listCatLeft=App\Models\Category::select('id','Alias', 'Name')
                                                 ->where([
                                                     ['IsActive','=',1],
-                                                    ['Level','=',0],
+                                                    ['Level','=',1],
                                                     ['Type','=',3]
                                                     ])
                                                 ->orderBy('Idx')
@@ -18,7 +18,7 @@
             @if($listCatLeft->count() > 0)
                 @foreach($listCatLeft as $listCatLeft)
                     @php
-                        $listCatLeftChildren=App\Models\Category::select('id','Alias', 'Name')->where([['IsActive','=',1],['Level','=',1],['ParentID','=', $listCatLeft->id],['Type','=',3]])->orderBy('Idx')->get();
+                        $listCatLeftChildren=App\Models\Category::select('id','Alias', 'Name')->where([['IsActive','=',1],['Level','=',2],['ParentID','=', $listCatLeft->id],['Type','=',3]])->orderBy('Idx')->get();
                     @endphp
                     @if($listCatLeftChildren->count() > 0)
                     <li>
@@ -54,7 +54,7 @@
     </div>
     <!-- Tin tức mới nhất -->
     @php 
-        $news=App\Models\Article::where(['IsActive'=>1])->orderBy('id','DESC')->get();
+        $news=App\Models\Article::where(['IsActive'=>1])->orderBy('id','DESC')->limit(5)->get();
     @endphp
     <div class="clearfix"></div>
     <div class="hotline">
@@ -67,8 +67,8 @@
                 @foreach($news as $value)
                     @if($loop->iteration ==1)
                         <ul class="ul-news p-0 mb-0">
-                            <img src="{{$news_1->Img}}" class="img-fluid icon-user-name" alt="Responsive image">
-                            <h3><a href="{{getLinkById($news_1->CatId)}}/{{$news_1->Alias}}.html" title="">{{$news_1->Name}}</a></h3>
+                            <img src="{{$value->Img}}" class="img-fluid icon-user-name" alt="Responsive image">
+                            <h3><a href="{{getLinkById($value->CatId)}}/{{$value->Alias}}.html" title="">{{$value->Name}}</a></h3>
                         </ul>
                     @else
                         <ul class="ul-news">

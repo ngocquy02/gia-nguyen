@@ -67,7 +67,7 @@ class ArticleController extends Controller
         $image = $request->file('Img');
         $file_name = 'Upload/article/'.time().'-'.$image->getClientOriginalName();
         $img = Image::make($image->getRealPath());
-        $img->fit(750, 350)->save($file_name,100);
+        $img->fit(235, 148)->save($file_name,100);
        
         $article->Name            =     $request->Name; 
         $article->Alias           =     str_slug($request->Alias);
@@ -145,7 +145,7 @@ class ArticleController extends Controller
             /* thêm chữ vào hình ảnh*/
             // $img->text('chien-cho', 120, 100);
             /* end */
-            $img->fit(750, 350)->save($file_name,100);
+            $img->fit(235, 148)->save($file_name,100);
             // Xóa file cũ
            if ($article->Img !='') {
             File::delete($article->Img);

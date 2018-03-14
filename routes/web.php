@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('tin-tuc1',function(){
+    return view('news');
+});
+
     // đăng nhập vào quản trị
     Route::get('xjk-control/login', ['as'=>'login','uses' => 'LoginController@login']);
     Route::post('xjk-control/login', ['as'=>'postLogin','uses' => 'LoginController@postLogin']);
@@ -218,6 +222,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
     Route::get('/', ['as'=>'getIndex','uses' => 'PublicController@getIndex']);
+    // Route::get('123123')->middleware('level');
     // Giỏ hàng 
    /* Route::get('gio-hang', ['as'=>'getCart','uses' =>'PublicController@getCart']);
     Route::get('thanh-toan', ['as'=>'getCheckOut','uses' =>'PublicController@getCheckOut']);*/

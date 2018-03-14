@@ -257,7 +257,7 @@ function getMenuSidebar($active='')
     $sidebar.='">
         <a href="" class="menu-dropdown">
             <i class="fa fa-user"></i>
-            <span class="menu-text"> QUẢN LÝ ADMIN </span>
+            <span class="menu-text"> QUẢN LÝ USER </span>
             <i class="menu-expand"></i>
              
         </a>
@@ -266,10 +266,7 @@ function getMenuSidebar($active='')
 				<a href="'.route("role-user",['role'=>1]).'">Admintrator</a>
 			</li>
 			<li>
-				<a href="'.route("role-user",['role'=>2]).'">Quản lý</a>
-			</li>
-			<li>
-				<a href="'.route("role-user",['role'=>3]).'">Nhân viên</a>
+				<a href="'.route("role-user",['role'=>2]).'">User</a>
 			</li>
         </ul>
     </li>

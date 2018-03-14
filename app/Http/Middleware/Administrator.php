@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+Use Auth;
+Use App\User;
 
 class Administrator
 {
@@ -14,7 +16,7 @@ class Administrator
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+    {   
         return $next($request);
     }
 }

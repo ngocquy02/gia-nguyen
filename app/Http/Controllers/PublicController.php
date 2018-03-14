@@ -93,8 +93,10 @@ class PublicController extends Controller
 					    		}
 		    			}
 	    			}
-	    			$items=Article::whereIn('CatId',$listCatId)->paginate(5);
-	    			return view('news',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$check->Name]);
+	    			$count_article = Article::all();
+	    			// dd($count_article);die;
+	    			$items=Article::whereIn('CatId',$listCatId)->paginate(12);
+	    			return view('news',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$check->Name,'count_article' => $count_article]);
 	    			break;
 	    		case '5':
 	    			$item=Article::where('CatId',$check->id)->first();
@@ -114,6 +116,8 @@ class PublicController extends Controller
     // Kiểm tra danh mục Level 1
     public function getParent($root,$parent)
     {
+    	// echo $parent;die;
+
     	$company=Company::where('Locale','vi-vn')->first();
     	$checkRoot=Category::where([['IsActive','=',1],['Alias','=',$root]])->first();
     	$checkParent=Category::where([['IsActive','=',1],['Alias','=',$parent]])->first();
@@ -144,8 +148,8 @@ class PublicController extends Controller
 	    					$listCatId=array_prepend($listCatId, $key->id);
 		    			}
 	    			}
-	    			$items=Article::whereIn('CatId',$listCatId)->paginate(5);
-	    			return view('news',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$checkParent->Name]);
+	    			$items=Article::whereIn('CatId',$listCatId)->paginate(12);
+	    			return view('news',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$checkRoot->Name,'checkParent'=>$checkParent->Name]);
 	    			break;
 	    	}
     	}
@@ -160,7 +164,7 @@ class PublicController extends Controller
     }
     // Kiểm tra danh mục Level 2
     public function getChild($root,$parent,$child)
-    {
+    {	
     	$company=Company::where('Locale','vi-vn')->first();
     	$checkRoot=Category::where([['IsActive','=',1],['Alias','=',$root]])->first();
     	$checkParent=Category::where([['IsActive','=',1],['Alias','=',$parent]])->first();
@@ -176,8 +180,8 @@ class PublicController extends Controller
 	    			return view('products',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$checkChild->Name]);
 	    			break;
 	    		case '4':
-	    			$items=Article::where('CatId',$checkChild->id)->paginate(5);
-	    			return view('news',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$checkChild->Name]);
+	    			$items=Article::where('CatId',$checkChild->id)->paginate(12);
+	    			return view('news',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$checkRoot->Name,'checkParent' =>$checkParent->Name,'checkChild'=>$checkChild->Name]);
 	    			break;
 	    	}
     	}
@@ -337,6 +341,7 @@ class PublicController extends Controller
 	    			break;
 	    		case '4':
 	    			$item= Article::where(['IsActive'=>1,'Alias' =>$detail])->first();
+	    			// dd($item);die;
 			    	if($item && $item->CatId==$checkChild->id)
 			    	{
 		    			$header['title']=($checkChild->MetaTitle=='') ? $company->MetaTitle : $checkChild->MetaTitle;

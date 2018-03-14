@@ -23,7 +23,11 @@
 
             @php
                 $listCatID=$value->categorys()->get();
-                $product = App\Models\Product::Where(['CatId'=>$value->id,'IsActive'=>1])->limit(8)->get();
+                if ($loop->first==true){
+                    $product = App\Models\Product::Where(['CatId'=>$value->id,'IsActive'=>1])->limit(8)->get();
+                }else{
+                    $product = App\Models\Product::Where(['CatId'=>$value->id,'IsActive'=>1])->limit(4)->get();
+                }
             @endphp
             <div class="content-list-sp row">
                 @if($product->count()>0)
@@ -43,8 +47,6 @@
                          <code>Không có sản phẩm</code>
                     </div>
                 @endif
-
-                
             </div>
         @endforeach
     @else
@@ -52,9 +54,6 @@
             Không có danh mục sản phẩm
         </code>
     @endif
-
-   
-    
 </div>
 @endsection
 @section('jsProduct')
