@@ -363,27 +363,21 @@
                                             </form>
                                         </div>
                                         <div class="col-sm-6">
-                                            <form role="form" action="{{ route('postCompanyImg') }}" name='frm_img' method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                                            <form role="form" action="{{ route('postCompanyFile') }}" name='frm_img' method="post" accept-charset="utf-8" enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="id" value="{{ $item->id}}">
                                             <div class="form-group">
-                                                Ảnh nền
+                                                Profile
                                                 <div class="input-group">
                                                     <span class="input-group-btn">
                                                         <span class="btn btn-info btn-file">
-                                                            Browse… <input type="file" id="imgImage" name="Img">
+                                                            Browse… <input type="file" id="imgImage" name="File" >
                                                         </span>
                                                     </span>
-                                                    <input type="text" class="form-control"  placeholder="Chọn hình ảnh nền" readonly>
+                                                    <input type="text" class="form-control"  placeholder="Chọn file" readonly value="{{$item->File or ''}}">
                                                 </div>
-                                                <img id='img-upload-image'/>
-                                                @if ($errors->has('Img'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('Img') }}</strong>
-                                                    </span>
-                                                @endif
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Thay đổi ảnh</button>
+                                            <button type="submit" class="btn btn-primary">Lưu</button>
                                             </form>
                                         </div>
                                     </div>

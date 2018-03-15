@@ -26,7 +26,7 @@ class ProviceTableSeeder extends Seeder
                 'Viber'           => 'Company@gmail.com',
                 'Zalo'            => 'Company@gmail.com',
                 'Logo'            => 'Company@gmail.com',
-                'Img'             => 'Company@gmail.com',
+                'File'             => 'Company@gmail.com',
                 'Map'             => 'Company@gmail.com',
                 'Analytic'        => 'Company@gmail.com',
                 'Chatbox'         => 'Company@gmail.com',

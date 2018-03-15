@@ -27,8 +27,16 @@
 
             @php
                 $listCatID=$value->categorys()->get();
-
-                $product = App\Models\Product::Where(['CatId'=>$value->id,'IsActive'=>1])->limit($limit)->get();
+                    
+                    $listCatId=array($value->id);
+                    $listCate=$value->categorys()->get();
+                    if($listCate->count() > 0)
+                    {
+                        foreach ($listCate as $key) {
+                            $listCatId=array_prepend($listCatId, $key->id);
+                        }
+                    }
+                    $product=\App\Models\Product::whereIn('CatId',$listCatId)->orderBy('created_at','desc')->limit( $limit)->get();
             @endphp
             <div class="content-list-sp row">
                 @if($product->count()>0)
@@ -67,7 +75,6 @@
 @endsection
 
 @section('sidebar')
-    @include('layouts/hotline-sidebar')
     @include('layouts/news-sidebar')
     @include('layouts/partner-sidebar')
     @include('layouts/xuong-sidebar')

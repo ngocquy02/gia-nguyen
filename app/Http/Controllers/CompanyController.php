@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CompanyMapRequest;
 use App\Http\Requests\CompanyRequest;
-use App\Http\Requests\CompanyImgRequest;
+use App\Http\Requests\CompanyFileRequest;
 use App\Http\Requests\CompanyLogoRequest;
 use File;
 use App\Models\Company;
@@ -66,22 +66,21 @@ class CompanyController extends Controller
 		$Company->save();
     	return redirect()->route('getCompany');
     }
-    public function postCompanyImg(CompanyImgRequest $request)
-    {
-    	$Company = Company::find($request->id);
-            $image = $request->file('Img');
-            $file_name = 'Upload/company/'.time().'-'.$image->getClientOriginalName();               
-            $img = Image::make($image->getRealPath());
-            $img->fit(1366, 300)->save($file_name,100);
-
-		if ($Company->Img !='') {
-			File::delete($Company->Img);
-		}
-    	$Company->Img=$file_name;
-    	$Company->save();
+    public function postCompanyFile(CompanyFileRequest $request)
+    {   
+        $Company = Company::find($request->id);
+        $file = $request->file('File');
+        $file_name = 'Upload/company/'.time().'-'.str_slug($file->getClientOriginalName());  
+        $request->file('File')->move('Upload/company/',$file_name); 
+        if($Company->File !='') {
+            File::delete($Company->File);        
+        }           
+        $Company->File = $file_name;
+        $Company->save();
 
     	return redirect()->route('getCompany');
     }
+
     public function postCompanyLogo(CompanyLogoRequest $request)
     {
     	$Company = Company::find($request->id);

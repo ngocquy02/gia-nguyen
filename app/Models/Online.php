@@ -7,6 +7,6 @@ use App\Http\Requests;
 
 class Online extends Model
 {
-    protected $table = 'onlines';
+    protected $table = 'online';
     protected $guarded = [];
 }

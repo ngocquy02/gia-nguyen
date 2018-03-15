@@ -59,19 +59,19 @@
                             </div>
                             <div class="form-group">
                                 <span class="input-icon icon-right">
-                                    <input type="text" class="form-control" name="Email" id="emailInput" placeholder="Email Address" value="{{isset($item)? $item->Email : ''}}" required="">
+                                    <input type="email" class="form-control" name="Email" id="emailInput" placeholder="Email Address" value="{{isset($item)? $item->Email : ''}}" required="">
                                     <i class="fa fa-envelope-o circular"></i>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <span class="input-icon icon-right">
-                                    <input type="text" class="form-control" name="Password" id="passwordInput" placeholder="Password" required="">
+                                    <input type="password" class="form-control" name="Password" id="passwordInput" placeholder="Password" required="">
                                     <i class="fa fa-lock circular"></i>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <span class="input-icon icon-right">
-                                    <input type="text" class="form-control" name="ConfirmPassword" id="confirmPasswordInput" placeholder="Confirm Password" required="">
+                                    <input type="password" class="form-control" name="ConfirmPassword" id="confirmPasswordInput" placeholder="Confirm Password" required="">
                                     <i class="fa fa-lock circular"></i>
                                 </span>
                             </div>
@@ -108,7 +108,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <span class="input-icon icon-right">
-                                            <input type="text" class="form-control" placeholder="Phone"  value="{{isset($item)? $item->Phone : ''}}" required="" name="Phone">
+                                            <input type="phone" class="form-control" placeholder="Phone"  value="{{isset($item)? $item->Phone : ''}}" required="" name="Phone">
                                             <i class="glyphicon glyphicon-phone"></i>
                                         </span>
                                     </div>

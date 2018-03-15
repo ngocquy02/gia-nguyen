@@ -3,11 +3,26 @@
             <div class="row">
                 <div class="col-xs-12 col-md-offset-12 col-md-8 col-lg-8 pr-0">
                     <ul class="left menu-top">
-                        <li>Hotline: <a href="tel:{{ isset($company) ? $company->Phone : ""}}" title=""><span>{{ isset($company) ? $company->Phone : ""}}</span></a> | </li>
-                        <li><a href="tel:{{ isset($company) ? $company->Tax : ""}}" title=""><span>{{ isset($company) ? $company->Tax : ""}}</a></span> | </li>
-                        {{-- <li>Tư vấn nội thất: <a href="" title=""><span>Ms.Loan</span></a> | </li> --}}
-                        {{-- <li><a href="" title=""><span>0902 569 854</span></a> | </li> --}}
-                        {{-- <li>Download: <a href="" title=""><span>Profile</span></a></li> --}}
+                        @php
+                            $hotlines = App\Models\Hotline::where(['IsActive' => 1])->orderBy('created_at','desc')->limit(3)->get();    
+                        @endphp
+                        @if($hotlines->count()>0)
+                        
+                            @foreach($hotlines as $hotline)
+                                @if($loop->iteration == 3)
+                                    <li>Tư vấn nội thất: <a href="" title=""><span>{{$hotline->Name}}</span></a> | </li>
+                                    <li><a href="" title=""><span>{{$hotline->Phone}}</span></a> | </li>
+                                @elseif($loop->first == true)
+                                 <li>Hotline:<a href="" title=""><span>{{$hotline->Phone}}</span></a> | </li>
+                                @else
+                                 <li><a href="" title=""><span>{{$hotline->Phone}}</span></a> | </li>
+
+                                @endif
+                            @endforeach
+                        @endif
+                       
+                        
+                        <li>Download: <a href="{{ isset($company->File) ? $company->File : ""}}" title=""><span>Profile</span></a></li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">

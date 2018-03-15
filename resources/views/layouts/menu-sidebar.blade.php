@@ -39,7 +39,7 @@
         </ul>
     </div>
     <div class="clearfix"></div>
-    
+    @include('layouts/hotline-sidebar')
     
     <div class="clearfix"></div>
     

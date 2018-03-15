@@ -28,7 +28,7 @@ class CreateCompanyTable extends Migration
             $table->string('Viber')->nullable();
             $table->string('Zalo')->nullable(); // Zalo của công ty của công ty
             $table->string('Logo',2083); // Tên hình ảnh logo của công ty
-            $table->string('Img',2083)->nullable(); // Tên hình ảnh header của trang web
+            $table->string('File',2083)->nullable(); // Tên hình ảnh header của trang web
             $table->text('Map'); // Nhúng Map của công ty
             $table->text('Analytic')->nullable(); // Mã analytic của công ty
             $table->text('Chatbox')->nullable(); // Mã chatbox của công ty

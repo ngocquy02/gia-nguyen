@@ -10,9 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('tin-tuc1',function(){
-    return view('news');
-});
+     Route::get('/dowload?path={path}',function($path){
+            echo $path;
+            // return response()->download($pathToFile);
+    });
 
     // đăng nhập vào quản trị
     Route::get('xjk-control/login', ['as'=>'login','uses' => 'LoginController@login']);
@@ -104,7 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', ['as'=>'getCompany','uses' => 'CompanyController@getCompany']);
             Route::post('map', ['as'=>'postCompanyMap','uses' => 'CompanyController@postCompanyMap']);
             Route::post('/', ['as'=>'postCompany','uses' => 'CompanyController@postCompany']);
-            Route::post('img', ['as'=>'postCompanyImg','uses' => 'CompanyController@postCompanyImg']);
+            Route::post('file', ['as'=>'postCompanyFile','uses' => 'CompanyController@postCompanyFile']);
             Route::post('logo', ['as'=>'postCompanyLogo','uses' => 'CompanyController@postCompanyLogo']);
         });
         // Trang xử lý slider
@@ -236,6 +237,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('thanh-toan', ['as'=>'getCheckOut','uses' =>'PublicController@getCheckOut']);*/
     /*Đăng nhập bằng Facebook*/
     Route::get('login/facebook', ['as'=>'getLoginFb','uses' =>'PublicController@redirectToProvider']);
+   
     Route::get('login/facebook/callback', ['as'=>'getLoginFbCallBack','uses' =>'PublicController@handleProviderCallback']);
 /*Đăng nhập bằng Google*/
      Route::get('login/google', ['as'=>'getLoginGoogle','uses' =>'PublicController@redirectToProviderGoogle']);
@@ -310,4 +312,3 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('contact', ['as'=>'postContact','uses' => 'PublicController@postContact']);
     Route::post('tim-kiem-san-pham', ['as'=>'postSeachProduct','uses' => 'PublicController@postSeachProduct']);
-
