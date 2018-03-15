@@ -275,7 +275,7 @@ class CategoryController extends Controller
 	        $products=Category::Find($request->id)->products()->get();
 	        if (count($products)>0) {
 	            foreach ($products as $product) {
-	            	$images=Product::Find($product->id)->images()->get();
+	            	$images=Product::Find($product->id)->get();
 			        if ($images) {
 			            foreach ($images as $image) {
 			                if (File::exists('Upload/product/images/'.$image->Img)) {

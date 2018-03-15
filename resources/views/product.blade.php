@@ -8,16 +8,16 @@
                     <h2 class="m-0 p-0">
                         <a href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" title="">
                             Trang chủ
-                            @if($check)
-                            >   {!!$check->Name!!}
+                            @if(isset($check))
+                           &#x3E;&nbsp;   {!!$check->Name!!}
                             @endif
                             @if(isset($checkParent))
-                            >   {!!$checkParent->Name!!}
-                            @endif
+                            &#x3E;&nbsp;   {!!$checkParent->Name!!}
+                            @endif 
                             @if(isset($checkChild))
-                            >   {!!$checkChild->Name!!}
+                            &#x3E;&nbsp;   {!!$checkChild->Name!!}
                             @endif
-                            > {!!$item->Name!!}
+                            &#x3E;&nbsp; {!!$item->Name!!}
                         </a>
                     </h2>
                 </div>
@@ -69,4 +69,7 @@
 @endsection()
 @section('jsProduct')
 
+@endsection
+@section('sidebar')
+    @include('layouts/hotline-sidebar')
 @endsection

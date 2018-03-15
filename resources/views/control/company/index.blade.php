@@ -407,7 +407,7 @@
         var place = autocomplete.getPlace();
         var lat = place.geometry.location.lat();
         var lng = place.geometry.location.lng();
-        var url = '<iframe src = "https://maps.google.com/maps?q=' + lat +','+lng +'&hl=es;z=14&amp;output=embed" style="width:100%"></iframe>';
+        var url = '<iframe src = "https://maps.google.com/maps?q=' + lat +','+lng +'&hl=es;z=14&amp;output=embed" style="width:100%;height:100%"></iframe>';
         $("#toado").val(url);
 
      })

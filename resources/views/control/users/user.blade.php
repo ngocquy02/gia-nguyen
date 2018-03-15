@@ -1,5 +1,5 @@
 @extends('control.master')
-@section('title','Danh sách hiển thị ảnh Slider')
+@section('title',(isset($item))?'Sửa thông tin user':'Thêm user'))
 @section('menu-left')
 {!!getMenuSidebar('') !!}
 @endsection
@@ -41,36 +41,37 @@
         <div class="col-lg-6 col-sm-6 col-xs-12">
             <div class="widget flat radius-bordered">
                 <div class="widget-header bg-blue">
-                    <span class="widget-caption">Đăng ký thông tin</span>
+                    <span class="widget-caption">{{isset($item)?'Sửa thông tin user':'Thêm thông tin user'}}</span>
                 </div>
                 <div class="widget-body">
                     <div id="registration-form">
-                        <form role="form" action="{{route('postRegister')}}" method="post">
+                        <form role="form" action="{{isset($item)?route('postEdit'):route('postRegister')}}" method="post">
                         {{ csrf_field() }}
                             <div class="form-title">
-                                Nhập thông tin đăng nhập
+                                Nhập thông tin 
                             </div>
                             <div class="form-group">
                                 <span class="input-icon icon-right">
-                                    <input type="text" class="form-control" id="userameInput" name="FullName" placeholder="Full Name">
+                                    <input hidden="" name="id" value="{{isset($item)? $item->id : ''}}">
+                                    <input type="text" class="form-control" id="userameInput" name="FullName" placeholder="Full Name" value="{{isset($item)? $item->FullName : ''}}" required="">
                                     <i class="glyphicon glyphicon-user circular"></i>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <span class="input-icon icon-right">
-                                    <input type="text" class="form-control" name="Email" id="emailInput" placeholder="Email Address">
+                                    <input type="text" class="form-control" name="Email" id="emailInput" placeholder="Email Address" value="{{isset($item)? $item->Email : ''}}" required="">
                                     <i class="fa fa-envelope-o circular"></i>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <span class="input-icon icon-right">
-                                    <input type="text" class="form-control" name="Password" id="passwordInput" placeholder="Password">
+                                    <input type="text" class="form-control" name="Password" id="passwordInput" placeholder="Password" required="">
                                     <i class="fa fa-lock circular"></i>
                                 </span>
                             </div>
                             <div class="form-group">
                                 <span class="input-icon icon-right">
-                                    <input type="text" class="form-control" name="ConfirmPassword" id="confirmPasswordInput" placeholder="Confirm Password">
+                                    <input type="text" class="form-control" name="ConfirmPassword" id="confirmPasswordInput" placeholder="Confirm Password" required="">
                                     <i class="fa fa-lock circular"></i>
                                 </span>
                             </div>
@@ -81,7 +82,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <span class="input-icon icon-right">
-                                            <input type="text" class="form-control" placeholder="Facebook">
+                                            <input type="text" class="form-control" placeholder="Facebook"  value="{{isset($item)? $item->Facebook : ''}}" required="" name="Facebook">
                                             <i class="fa fa-user"></i>
                                         </span>
                                     </div>
@@ -89,7 +90,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <span class="input-icon icon-right">
-                                            <input type="text" class="form-control" placeholder="Skype">
+                                            <input type="text" class="form-control" placeholder="Skype"  value="{{isset($item)? $item->Skype : ''}}" required="" name="Skype">
                                             <i class="fa fa-user"></i>
                                         </span>
                                     </div>
@@ -99,7 +100,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <span class="input-icon icon-right">
-                                            <input type="text" class="form-control" placeholder="Google Plus">
+                                            <input type="text" class="form-control" placeholder="Google Plus"  value="{{isset($item)? $item->Google : ''}}" required="" name="Google">
                                             <i class="glyphicon glyphicon-earphone"></i>
                                         </span>
                                     </div>
@@ -107,21 +108,21 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <span class="input-icon icon-right">
-                                            <input type="text" class="form-control" placeholder="Phone">
+                                            <input type="text" class="form-control" placeholder="Phone"  value="{{isset($item)? $item->Phone : ''}}" required="" name="Phone">
                                             <i class="glyphicon glyphicon-phone"></i>
                                         </span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" class="colored-blue">
                                         <span class="text">Auto Sign In After Registration</span>
                                     </label>
                                 </div>
-                            </div>
-                            <button type="submit" class="btn btn-blue">Register</button>
+                            </div> --}}
+                            <button type="submit" class="btn btn-blue">{{isset($item)? 'Lưu' : 'Thêm'}}</button>
                         </form>
                     </div>
                 </div>

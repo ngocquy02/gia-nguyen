@@ -37,6 +37,22 @@ class PublicController extends Controller
 	    $header['description']=$company->MetaDescription;
 	    $header['keywords']=$company->MetaKeyword;
 	    $header['image']=$company->Logo;
+	    $check=Category::where(['IsActive' => 1])->get();
+	    // $CatId = [];
+	    // $Cats_Lv1 = Category::where(['IsActive'=>1,'Level' => 1])->orderBy('created_at','desc')->get();
+	    // $i =0;
+	    // foreach ($Cats_Lv1 as $Cat_Lv1 ) {
+	    // 	$CatId[$i] = array_prepend($CatId,$Cat_Lv1->id);
+	    // 	// $CatName[$i] = $Cat_Lv1->Name;
+	    // 	$CatIdslv1[$i] = $Cat_Lv1->id;
+	    // 	$Cats_Lv2 = Category::where(['IsActive'=>1,'Level' => 2,'ParentID' => $Cat_Lv1->id])->orderBy('created_at','desc')->get();
+	    // 	foreach ($Cats_Lv2 as $Cat_Lv2) {
+	    // 		$CatId[$i] = array_prepend($CatId[$i],$Cat_Lv2->id);
+	    // 	}
+	    // 	$i++;
+	    // }
+
+	    // dd($CatId);die;
     	return view('index',['company'=>$company,'root'=>'','header'=>$header]);
     }
     // Kiểm tra danh mục Level 0
@@ -54,7 +70,7 @@ class PublicController extends Controller
 	    			return view('index',['company'=>$company,'root'=> $root,'header'=>$header]);
 	    			break;
 	    		case '2':
-	    			return view('contact',['company'=>$company,'root'=> $root,'header'=>$header]);
+	    			return view('contact',['company'=>$company,'root'=> $root,'header'=>$header]); 
 	    			break;
 	    		case '3':
 	    			$listCatId=array($check->id);
@@ -72,7 +88,7 @@ class PublicController extends Controller
 					    		}
 		    			}
 	    			}
-	    			$items=Product::whereIn('CatId',$listCatId)->paginate(15);
+	    			$items=Product::whereIn('CatId',$listCatId)->orderBy('created_at','desc')->paginate(16);
 	    			// dd($root);die;
 	    			// dd($items);die;
 	    			return view('products',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$check->Name]);
@@ -95,7 +111,7 @@ class PublicController extends Controller
 	    			}
 	    			$count_article = Article::all();
 	    			// dd($count_article);die;
-	    			$items=Article::whereIn('CatId',$listCatId)->paginate(12);
+	    			$items=Article::whereIn('CatId',$listCatId)->orderBy('id','desc')->paginate(12);
 	    			return view('news',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$check->Name,'count_article' => $count_article]);
 	    			break;
 	    		case '5':
@@ -136,7 +152,7 @@ class PublicController extends Controller
 	    					$listCatId=array_prepend($listCatId, $key->id);
 		    			}
 	    			}
-	    			$items=Product::whereIn('CatId',$listCatId)->paginate(15);
+	    			$items=Product::whereIn('CatId',$listCatId)->orderBy('created_at','desc')->paginate(16);
 	    			return view('products',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$checkParent->Name]);
 	    			break;
 	    		case '4':
@@ -148,7 +164,7 @@ class PublicController extends Controller
 	    					$listCatId=array_prepend($listCatId, $key->id);
 		    			}
 	    			}
-	    			$items=Article::whereIn('CatId',$listCatId)->paginate(12);
+	    			$items=Article::whereIn('CatId',$listCatId)->orderBy('created_at','desc')->paginate(6);
 	    			return view('news',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$checkRoot->Name,'checkParent'=>$checkParent->Name]);
 	    			break;
 	    	}
@@ -176,11 +192,11 @@ class PublicController extends Controller
 		    $header['image']=($checkChild->Img=='') ? $company->Logo : 'Upload/category/'.$checkChild->Img;
 	    	switch ($checkChild->Type) {
 	    		case '3':
-	    			$items=Product::where('CatId',$checkChild->id)->paginate(15);
-	    			return view('products',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$checkChild->Name]);
+	    			$items=Product::where('CatId',$checkChild->id)->orderBy('created_at','desc')->paginate(16);
+	    			return view('products',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$checkRoot->Name,'checkParent' => $checkParent->Name,'checkChild'=>$checkChild->name]);
 	    			break;
 	    		case '4':
-	    			$items=Article::where('CatId',$checkChild->id)->paginate(12);
+	    			$items=Article::where('CatId',$checkChild->id)->orderBy('created_at','desc')->paginate(12);
 	    			return view('news',['company'=>$company,'root'=> $root,'header'=>$header,'items'=>$items,'RootName'=>$checkRoot->Name,'checkParent' =>$checkParent->Name,'checkChild'=>$checkChild->Name]);
 	    			break;
 	    	}
@@ -636,9 +652,11 @@ class PublicController extends Controller
     // Liên hệ
     public function postContact(ContactRequest $request)
     {
+    	// d;
     	$contact= new Contact;
 		$contact->FullName   	=	$request->FullName;
 		$contact->Email      	=	$request->Email;
+		$contact->Phone      	=	$request->Phone;
 		$contact->Content    	=	$request->Content;
 		$contact->updated_at 	=	 new DateTime();
 		$contact->created_at 	=	 new DateTime();
@@ -655,7 +673,7 @@ class PublicController extends Controller
     // Tìm kiếm sản phẩm
     public function postSeachProduct(Request $request)
     {
-    	$items= Product::where([['Name','like',$request->Seach.'%'],['IsActive','=',1]])->paginate(15);
+    	$items= Product::where([['Name','like',$request->Seach.'%'],['IsActive','=',1]])->paginate(16);
     	$company=Company::where('Locale','vi-vn')->first();
 		$header['title']       	=	 'Kết quả tìm kiếm từ khóa '.$request->Seach;
 		$header['description'] 	=	'Kết quả tìm kiếm từ khóa '.$request->Seach;

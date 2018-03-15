@@ -28,8 +28,9 @@ class PartnerController extends Controller
     /*------------ Xem và chỉnh sửa đối tác-----------*/
     public function getEditPartner($id)
     {   
-    	$item=Partner::Find($id);
-    	if(count($item)>0){
+        $item=Partner::Find($id);
+    	$item2=Partner::all();
+    	if(count($item2)>0){
             return  view('control/partner/partner',compact('item'));
         }
         else
@@ -91,29 +92,16 @@ class PartnerController extends Controller
     public function postAddPartner(PartnerRequest $request)
     {
         $partner =new Partner;
-        // $image = $request->file('Img');
-        // $file_name = time().'-'.$request->file('Img')->getClientOriginalName();   
-        // $destinationPath = 'Upload/partner/';
-        // $img = Image::make($image->getRealPath());
-        // $img->fit(200, 120)->save($destinationPath.'/'.$file_name);
-        $file_name='noimage.gif';
-
-        $partner->FullName     =     $request->FullName;
-        $partner->Email        =     $request->Email;
+        $image = $request->file('Img');
+        $file_name = time().'-'.$request->file('Img')->getClientOriginalName();   
+        $destinationPath = 'Upload/partner/';
+        $img = Image::make($image->getRealPath());
+        $img->fit(200, 120)->save($destinationPath.'/'.$file_name);
+        // $file_name='noimage.gif';
+        $partner->Img     =     $destinationPath.$file_name;
+        $partner->Name     =     $request->Name;
+        $partner->Url        =     $request->Url;
         $partner->IsActive     =     ($request->IsActive=='on') ? 1 : 0;
-        $partner->Phone        =     $request->Phone;
-        $partner->Company      =     $request->Company;
-        $partner->Password     =     bcrypt('123456a');
-        $partner->Role         =     $request->Role;
-        $partner->Coin         =     $request->Coin;
-        $partner->Code         =     rand(100000,999999);
-        $partner->Address      =     $request->Address;
-        $partner->CustomerType =     $request->CustomerType;
-        $partner->Content      =     $request->Content;
-        $partner->Cmnd      =     $request->Cmnd;
-        $partner->Birthday      =     $request->Birthday;
-        $partner->Gplx      =     $request->Gplx;
-        $partner->Gtx      =	 $request->Gtx;
         $partner->created_at   =     new DateTime();
         $partner->updated_at   =     new DateTime();
         $partner->save();
@@ -124,26 +112,25 @@ class PartnerController extends Controller
     {
         $partner =Partner::Find($request->id);
         if ($partner) {
-        $file_name='noimage.gif';
-        $partner->Code         =     ($partner->Code==null)?rand(100000,999999):$partner->Code;
-        $partner->FullName     =     $request->FullName;
-        $partner->Email        =     $request->Email;
-        $partner->IsActive     =     ($request->IsActive=='on') ? 1 : 0;
-        $partner->Phone        =     $request->Phone;
-        $partner->Company      =     $request->Company;
-        $partner->Role         =     $request->Role;
-        $partner->Coin         =     $request->Coin;
-        $partner->Address      =     $request->Address;
-        $partner->CustomerType =     $request->CustomerType;
-        $partner->Content      =     $request->Content;
-        $partner->Cmnd      =     $request->Cmnd;
-        $partner->Birthday      =     $request->Birthday;
-        $partner->Gplx      =     $request->Gplx;
-        $partner->Gtx      =     $request->Gtx;
-        $partner->created_at      =     new DateTime();
-        $partner->updated_at      =     new DateTime();
-        $partner->save();
-        return redirect()->route('getPartner');
+            if($request->Img==''){
+                $file_name1 = $partner->Img;
+            }else{
+                $file_name = time().'-'.$request->file('Img')->getClientOriginalName();   
+                $destinationPath = 'Upload/partner/';
+                $image = $request->file('Img');
+                $img = Image::make($image->getRealPath());
+                $img->fit(200, 120)->save($destinationPath.'/'.$file_name);
+                $file_name1 = $destinationPath.$file_name;
+            }
+
+            $partner->Img     =     $file_name1;
+            $partner->Name     =     $request->Name;
+            $partner->Url        =     $request->Url;
+            $partner->IsActive     =     ($request->IsActive=='on') ? 1 : 0;
+            $partner->created_at      =     new DateTime();
+            $partner->updated_at      =     new DateTime();
+            $partner->save();
+            return redirect()->route('getPartner');
         }
         else
         {

@@ -147,7 +147,7 @@
         </div>
     </div>
 </div>
-{{-- @if(isset($item))
+@if(isset($item))
     <script>
         $(document).ready(function(){ 
             $.ajaxSetup({ headers: {  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} });
@@ -270,7 +270,7 @@
             });
         });
     </script>
-@endif --}}
+@endif
      <script src="{{ asset('control/assets/js/select.image.js') }}"></script>
     <style>
         .btn-file {

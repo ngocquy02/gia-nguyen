@@ -24,21 +24,15 @@ class PartnerRequest extends FormRequest
     public function rules()
     {
         return [
-            'FullName'              =>          'required|max:255',
-            'Email'                 =>          'required|max:255|email',
-            'Birthday'                 =>          'nullable|date|date_format:"Y-m-d"',
+            'Name'              =>          'required|max:255',
+            'Url'                 =>          'required|max:255|url'
         ];
     }
     public function messages()
     {
         return [
-            'FullName.required'     =>          'Trường bắt buộc nhập',
-            'FullName.max'          =>          'Nội dung trường quá dài',
-            'Email.required'        =>          'Trường bắt buộc nhập',
-            'Email.email'           =>          'Trường không đúng định dạng',
-            'Email.max'             =>          'Nội dung trường quá dài',
-            'Birthday.date'             =>          'Ngày không đúng định dạng',
-            'Birthday.date_format'             =>          'Ngày không đúng định dạng',
+            'Name.required'     =>          'Trường bắt buộc nhập',
+            'Name.max'          =>          'Nội dung trường quá dài'
         ];
     }
 }

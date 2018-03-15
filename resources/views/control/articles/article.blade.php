@@ -78,23 +78,9 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <span ><strong>Hiện sản phẩm</strong> &nbsp&nbsp&nbsp</span>
+                                    <span ><strong>Hiện bài viết</strong> &nbsp&nbsp&nbsp</span>
                                     <label style="margin-top: 10px;">
                                         <input class="checkbox-slider slider-icon colored-blue" @if(isset($item) && $item->IsActive ==1) checked="checked" @endif type="checkbox" name="IsActive">
-                                        <span class="text"></span>
-                                    </label>
-                                </div>
-                                <div class="col-md-4">
-                                    <span ><strong>Sản phẩm nổi bật</strong> &nbsp&nbsp&nbsp</span>
-                                    <label style="margin-top: 10px;">
-                                        <input class="checkbox-slider slider-icon colored-blue" @if(isset($item) && $item->IsHot ==1) checked="checked" @endif type="checkbox" name="IsHot">
-                                        <span class="text"></span>
-                                    </label>
-                                </div>
-                                <div class="col-md-4 hidden">
-                                    <span ><strong>Hiển thị Home</strong> &nbsp&nbsp&nbsp</span>
-                                    <label style="margin-top: 10px;">
-                                        <input class="checkbox-slider slider-icon colored-blue" @if(isset($item) && $item->IsHome ==1) checked="checked" @endif type="checkbox" name="IsHome">
                                         <span class="text"></span>
                                     </label>
                                 </div>
@@ -109,13 +95,6 @@
                                             </span>
                                         </span>
                                         <input type="text" class="form-control" readonly>
-                                    </div>
-                                    <img id='img-upload'/>
-                                </div>
-                                <div class="col-md-6">
-                                    <span><strong>Tag</strong></span>
-                                    <div class="input-group">
-                                        <input type="text" name="Tag" value="{{ $tags or ''}}" class="form-control autocomple" data-role="tagsinput" style="height: 34px;" id="tags">
                                     </div>
                                     <img id='img-upload'/>
                                 </div>
@@ -184,7 +163,7 @@
                     dataType:'html',
                     success:function(msg)
                         {
-                           if (msg=='Tên sản phẩm đã tồn tại') 
+                           if (msg=='Tên bài viết đã tồn tại') 
                            {
                                 $(':input[type="submit"]').prop('disabled', true);
                                 $('label[name="Name"]').html(msg);
@@ -246,7 +225,7 @@
                     dataType:'html',
                     success:function(msg)
                         {
-                           if (msg!='Tên sản phẩm đã tồn tại') {
+                           if (msg!='Tên bài viết đã tồn tại') {
                                 $('label[name="Name"]').css('display','none');
                                 $('input[name="Alias"]').val(msg);
                                 $(':input[type="submit"]').prop('disabled', false);

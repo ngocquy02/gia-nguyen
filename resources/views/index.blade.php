@@ -5,10 +5,14 @@
 @section('content')
 <div class="list-sp">
     @php
-        $category = App\Models\Category::Where(['Type' =>3,'Level' =>1])->get();   
+        $category = App\Models\Category::Where(['Type' =>3,'Level' =>1])->get();
+        $dem=1; 
     @endphp
     @if($category->count() > 0 )
         @foreach($category as $value)
+            @php
+                $limit=($dem==1) ? 8 : 4;
+            @endphp
             <div class="header-list-sp">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -23,11 +27,8 @@
 
             @php
                 $listCatID=$value->categorys()->get();
-                if ($loop->first==true){
-                    $product = App\Models\Product::Where(['CatId'=>$value->id,'IsActive'=>1])->limit(8)->get();
-                }else{
-                    $product = App\Models\Product::Where(['CatId'=>$value->id,'IsActive'=>1])->limit(4)->get();
-                }
+
+                $product = App\Models\Product::Where(['CatId'=>$value->id,'IsActive'=>1])->limit($limit)->get();
             @endphp
             <div class="content-list-sp row">
                 @if($product->count()>0)
@@ -48,6 +49,9 @@
                     </div>
                 @endif
             </div>
+            @php
+                $dem++;
+            @endphp
         @endforeach
     @else
         <code>
@@ -55,6 +59,17 @@
         </code>
     @endif
 </div>
+
+    
+
 @endsection
 @section('jsProduct')
+@endsection
+
+@section('sidebar')
+    @include('layouts/hotline-sidebar')
+    @include('layouts/news-sidebar')
+    @include('layouts/partner-sidebar')
+    @include('layouts/xuong-sidebar')
+    @include('layouts/traffic-sidebar')
 @endsection

@@ -1,95 +1,65 @@
 @extends('layouts.master')
 @section('content')
-<!-- End Main Breadcrumb -->
-<!-- Main Content -->
-<div class="main-content">
-    <div class="container-fluid">
+<div class="list-sp">
+    <div class="header-list-sp">
         <div class="row">
-            <div class="header-name">
-                <h1>LIÊN HỆ</h1>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 form-style form-contact">
-                <form accept-charset='UTF-8' action='{!!route('postContact')!!}' id='contact' method='post'>
-                    {{ csrf_field() }}
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <i class="fa fa-user" aria-hidden="true" style="position: absolute;    color: #fff;left: 16px;top: 11px;background-color: #ccc;padding: 12px 15px;"></i>
-                            <input type="text" value="" name="FullName" title="Họ và Tên" placeholder="Họ và Tên của khách hàng" class="input-text ">
-                            <div class="help-block with-errors">
-                                <ul class="list-unstyled">
-                                    <li style="color: red">{{ $errors->has('FullName') ? $errors->first('FullName') : '' }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <i class="fa fa-envelope-o" aria-hidden="true" style="position: absolute;    color: #fff;left: 16px;top: 11px;background-color: #ccc;padding: 12px 15px;"></i>
-                            <input type="text" value="" class="input-text" name="Email" placeholder="E-Mail">
-                            <div class="help-block with-errors">
-                                <ul class="list-unstyled">
-                                    <li style="color: red">{{ $errors->has('Email') ? $errors->first('Email') : '' }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <i class="fa fa-phone" aria-hidden="true" style="position: absolute;    color: #fff;left: 16px;top: 11px;background-color: #ccc;padding: 12px 15px;"></i>
-                            <input type="text" value="" class="input-text" name="Phone" placeholder="Số điện thoại">
-                            <div class="help-block with-errors">
-                                <ul class="list-unstyled">
-                                    <li style="color: red">{{ $errors->has('Phone') ? $errors->first('Phone') : '' }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <i class="fa fa-pencil" aria-hidden="true" style="position: absolute;    color: #fff;left: 16px;top: 11px;background-color: #ccc;padding: 30px 15px;"></i>
-                            <textarea name="Content" title="Góp ý của khách hàng" placeholder="Góp ý của khách hàng" class="required-entry input-text" cols="5" rows="3"></textarea>
-                            <div class="help-block with-errors">
-                                <ul class="list-unstyled">
-                                    <li style="color: red">{{ $errors->has('Content') ? $errors->first('Content') : '' }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-10">
-                            <button type="submit" class="btn-cart">Gửi nhận xét</button>
-                        </div>
-                    </div>
-                </form>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 style="color: blue">{!!$Thankyou or '' !!}</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 footer-info ">
-                <div class="contact-info">
-                    <h3>{!!$company->Name!!}</h3>
-                    <p><span class="fa fa-map-marker"></span>{!!$company->Address!!}</p>
-                    <p><span class="fa fa-phone"></span>{!!$company->Phone!!}</p>
-                    <p><span class="fa fa-envelope"></span><a href="mailto:{!!$company->Email!!}">{!!$company->Email!!}</a></p>
-                    <p><span class="fa fa-ravelry"></span><a href="motech.vn">motech.vn</a></p>
+            <div class="col-xs-12 col-sm-6 col-md-9 col-lg-9">
+                <div class="header-name">
+                    <h2 class="m-0 p-0">
+                        <a href="{{$root}}" title="">
+                             TRANG CHỦ &#x3E; LIÊN HỆ
+                        </a>
+                    </h2>
                 </div>
             </div>
         </div>
     </div>
+    <div class="clearfix"></div>
+
+      <div class="content-list-sp row">
+        
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-bottom: 40px">
+            <form action="{{route('postContact')}}" method="POST" role="form">
+                {!! csrf_field() !!}
+                <div class="form-group">
+                    <input type="text" class="form-control contact" id="full-name" placeholder="Họ và Tên của khách hàng" required="" name="FullName">
+                    
+                    <input type="email" class="form-control contact" id="email" placeholder="Email" required="" name="Email">
+                    
+                    <input type="phone" class="form-control contact" id="" placeholder="Số điện thoại" required="" name="Phone">
+                   
+                    <textarea name="Content" id="input" class="form-control contact" rows="3" required="required" placeholder="Góp ý của khách hàng" style="min-height: 100px;" required=""></textarea>
+                </div>
+                <div class="text-center" style="margin-bottom: 15px">{{$Thankyou or '' }}</div>
+                <center>
+                    <button type="submit" class="btn btn-primary text-center">
+                        Gửi và nhận xét
+                    </button>
+                </center>
+            </form>          
+        </div>
+        <div  class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+             <div class="contact-info">
+                <h3>{!!$company->Name!!}</h3>
+                <p><span class="fa fa-map-marker"></span>{!!$company->Address!!}</p>
+                <p><span class="fa fa-phone"></span>{!!$company->Phone!!}</p>
+                <p><span class="fa fa-envelope"></span><a href="mailto:{!!$company->Email!!}">{!!$company->Email!!}</a></p>
+                <p><span class="fa fa-ravelry"></span><a href="motech.vn">motech.vn</a></p>
+            </div>
+        </div>
+            
+      </div>
 </div>
-<!-- End Main Content -->    
-<div class="container">
-    <div class="main-maps">
-        <style>iframe{width: 100%;height: 300px;}</style>
-        {!! $company->Map!!} 
-    </div>
-</div>
+@endsection
+
+@section('jsProduct')
+    <script type="text/javascript">
+        function contact(){
+
+        }
+    </script>
+@endsection
+@section('sidebar')
+    @include('layouts/hotline-sidebar')
+    @include('layouts/news-sidebar')
 @endsection

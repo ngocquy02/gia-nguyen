@@ -41,7 +41,7 @@ class AdvertiseController extends Controller
             $image = $request->file('Img');
             $file_name = 'Upload/slider/'.time().'-'.$image->getClientOriginalName();
             $img = Image::make($image->getRealPath());
-            $img->fit(1349, 500)->save($file_name,100);
+            $img->fit(800, 96)->save($file_name,100);
             $slider->Img             =     $file_name;
         }
         else{$slider->Img            =     '';}
@@ -87,7 +87,7 @@ class AdvertiseController extends Controller
             $image = $request->file('Img');
             $file_name = 'Upload/slider/'.time().'-'.$image->getClientOriginalName();
             $img = Image::make($image->getRealPath());
-            $img->fit(1349, 500)->save($file_name,100);
+            $img->fit(800, 96)->save($file_name,100);
             if($slider->Img!='')
             {
                 if (File::exists($slider->Img)) {

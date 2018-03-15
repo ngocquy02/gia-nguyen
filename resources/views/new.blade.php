@@ -25,45 +25,38 @@
         </div>
     </div>
     <div class="clearfix"></div>
-    <div class="content-list-sp">
+    <div class="content-sp">
+        <div class="float-right">
+            <span style="font-style: italic;font-size: 14px;margin-bottom: 10px;display: inline-block;"> 
+                Đăng ngày:{!!$item->created_at->format('d/m/Y - h:i:s')!!}
+            </span>
+        </div>
+       
        {!!$item->Content!!}
-       <div class="fb-like" data-href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+       {{-- <div class="fb-like" data-href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div> --}}
     </div>
-    <div class="clearfix"></div>  
-    <div class="list-sp">
-        <div class="header-list-sp">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <div class="header-name">
-                        <h2 class="m-0 p-0"><a title="">Các bài viết liên quan</a></h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-
-        <div class="content-list-sp row">
+    <div class="clearfix"></div>
+    <div class="news-lq">
+        <span>Những tin tức khác</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="list-news-lq">
+        <ul class="p-0 m-0">
             @php
-                $post = App\Models\Article::where(['CatId'=>$item->CatId,'IsActive'=>1])->limit(4)->get();
+                $news = App\Models\Article::orderBy('created_at','desc')->limit(5)->get();  
             @endphp
-            @if(isset($post))
-                @foreach($post as $value)
-                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 item-sp item-sp">
-                        <div class="product-img">
-                            <img src="{{$value->Img}}" class="img-fluid" alt="Responsive image">
-                        </div>
-                        <div class="product-name">
-                            <h3><a href="{{getLinkById($item->CatId)}}/{{$value->Alias}}.html" title="">{{$value->Name}}</a></h3>
-                            <div class="xem-them"><a href="{{getLinkById($item->CatId)}}/{{$value->Alias}}.html" title="">Xem thêm</a></div>
-                        </div>
-                    </div>
+            @if($news->count()>0)
+                @foreach($news as $new)
+                    <li><a href="{{getLinkById($new->CatId)}}\{{$new->Alias}}.html" title="">> {{$new->Name}}</a></li>
                 @endforeach
-                
             @else
-                <code>Không có các sản phẩm cùng loại</code>
+                <code>Không có bài viết liên quan</code>
             @endif
-            
-        </div>
+        </ul>
     </div>
 </div>
 @endsection()
+@section('sidebar')
+    @include('layouts/hotline-sidebar')
+    @include('layouts/news-sidebar')
+@endsection

@@ -1,99 +1,82 @@
 @extends('layouts.master')
 @section('content')
-<div class="main-breadcrumb">
-    <div class="container">
+<div class="list-sp">
+    <div class="header-list-sp">
         <div class="row">
-            <div class="col-lg-12">
-                <ol class="breadcrumb">
-                    <li><a href="">Trang chủ</a></li>
+            <div class="col-xs-12 col-sm-6 col-md-9 col-lg-9">
+                <div class="header-name">
+                    <h2 class="m-0 p-0">
+                        <a href="" title="">
+                           TRANG CHỦ > KẾT QUẢ TÌM KIẾM > {{$Keyword or ''}}
+                        </a>
+                    </h2>
+                </div>
 
-                    <li class="active breadcrumb-title">Kết quả tìm kiếm</li>
-
-                </ol>
             </div>
+
         </div>
     </div>
-</div>
-    <!-- End Main Breadcrumb -->
-    <!-- Main Content -->
-<div class="main-content">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">                                
-                <h1>Kết quả tìm kiếm với từ khóa: {!!$Keyword!!}</h1>
-                <div class="product-list-grid">
-                    <div class="row">
-                    @if($items->count() > 0)
-                        @foreach($items as $item)
-                            <div class="col-md-4 col-sm-4 col-xs-6">
-                            <div class="product-carousel item">
-                                <div class="prod-image">
-                                        <a href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html">
-                                            <img src="Upload/product/{{$item->Img}}" alt="{{$item->Name}}">
-                                        </a>
-                                    </div>
-                                    <h3 class="product-name"><a href="{{getLinkById($item->CatId)}}/{{$item->Alias}}.html" title="{{$item->Name}}">{{str_limit($item->Name, $limit =50, $end = '...')}}</a></h3>
-                                    <p class="price-box">
-                                        @if($item->Sale>0)
-                                        <span class="sale">
-                                            <del>
-                                                {{($item->Price*$item->Sale)/100 + $item->Price}}₫
-                                            </del> -
-                                        </span>
-                                        @endif
-                                        <span class="special-price"><span class="price product-price">{{($item->Price > 0) ? $item->Price.'₫':'Liên hệ'}}</span></span>
-                                    </p>
-                            </div>
-                        </div>
-                        @endforeach
-                    @else
-                    <code> Sản phẩm đang cập nhật</code>
-                    @endif
-                        {!!$items->links()!!}
-                    </div>
-                </div>            
-            </div>    
-        </div>
+    <div class="clearfix"></div>
+    <div class="content-list-sp row">
+        @foreach($items as $value)
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 item-sp item-sp">
+                <div class="product-img">
+                    <img src="Upload/product/1.jpg" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="product-name">
+                    <h3><a href="{{getLinkById($value->CatId)}}/{{$value->Alias}}.html" title="">{{$value->Name}}</a></h3>
+                    <div class="xem-them"><a href="{{getLinkById($value->CatId)}}/{{$value->Alias}}.html" title="">Xem thêm</a></div>
+                </div>
+            </div>
+        @endforeach
     </div>
+     @if ($items->lastPage() > 1)
+            <ul class="pagination float-right">
+                @if($items->currentPage() != 1 && $items->lastPage() >= 3)
+                    <li>
+                        <a href="{{ $items->url($items->url(1)) }}" aria-label="Previous">
+                            <span aria-hidden="true"><< Trang đầu</span>
+                        </a>
+                    </li>
+                @endif
+                @if($items->currentPage() != 1)
+                    <li>
+                        <a href="{{ $items->url($items->currentPage()-1) }}" aria-label="Previous">
+                            <span aria-hidden="true">&#x3C;&#x3C;</span>
+                        </a>
+                    </li>
+                @endif
+                @for($i = max($items->currentPage()-2, 1); $i <= min(max($items->currentPage()-2, 1)+4,$items->lastPage()); $i++)
+                @if($items->currentPage() == $i)
+                <li class="active">
+                @else
+                <li>
+                @endif
+                    <a href="{{ $items->url($i) }}">{{ $i }}</a>
+                </li>
+                @endfor
+                @if ($items->currentPage() != $items->lastPage())
+                    <li>
+                        <a href="{{ $items->url($items->currentPage()+1) }}" aria-label="Next">
+                            <span aria-hidden="true">&#x3E;&#x3E;</span>
+                        </a>
+                    </li>
+                @endif
+                @if ($items->currentPage() != $items->lastPage() && $items->lastPage() >= 3)
+                    <li>
+                        <a href="{{ $items->url($items->lastPage()) }}" aria-label="Next">
+                            <span aria-hidden="true">Trang cuối >></span>
+                        </a>
+                    </li>
+                @endif
+            </ul>
+        @endif
 </div>
 @endsection
 @section('jsProduct')
-<script >
-    $(document).ready(function(){
-     $.ajaxSetup({ headers: {  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} });
-    $('.product-atc').click(function(){
-        var id=$(this).attr('product-id');
-        var price=$(this).attr('product-price');
-        var qtt=$('#cart').attr('qtt');
-        $.ajax({
-        url:'{{route('postAddCart')}}', 
-        type:'post',
-        cache:false,
-        data:{price:price,id:id},
-        dataType:'html',
-        success:function(msg){
-            if(Number(qtt)==Number(msg)){
-                tb='Đã tăng số lượng lên 1';
-                Notify(tb, 'top-right', '5000', 'success', 'fa-check', true); 
-            }
-            else{
-                tb='Đã thêm sản phẩm và giỏ hàng';
-                $('#cart').attr('qtt',msg);
-                $('#cart').html(msg);
-            Notify(tb, 'top-right', '5000', 'success', 'fa-check', true); 
-            }
-        },
-        error:function(){ Notify('Truyền dữ liệu thất bại', 'top-right', '5000', 'danger', 'fa-bolt', true);}
-        });
-    });
-function Notify(message, position, timeout, theme, icon, closable) {
-    toastr.options.positionClass = 'toast-' + position;
-    toastr.options.extendedTimeOut = 0; //1000;
-    toastr.options.timeOut = timeout;
-    toastr.options.closeButton = closable;
-    toastr.options.iconClass = icon + ' toast-' + theme;
-    toastr['custom'](message);
-}
-});
-</script>
+
+@endsection
+@section('sidebar')
+    @include('layouts/hotline-sidebar')
+    @include('layouts/news-sidebar')
 @endsection

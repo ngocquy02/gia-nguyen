@@ -11,8 +11,11 @@
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <input type="search" name="Search" class=" input-search" required="required" title="Nhập từ khóa tìm kiếm" placeholder="Nhập từ khóa tìm kiếm">
-                    <button type="submit" class="btn-search" data-toggle="button" aria-pressed="false" autocomplete="off"><img src="assets/images/tim-kiem.jpg" class="img-fluid" alt="Responsive image"></button>
+                    <form action="{{route('postSeachProduct')}}" method="POST">
+                        {!! csrf_field() !!}
+                        <input type="search" name="Seach" class=" input-search" required="required" title="Nhập từ khóa tìm kiếm" placeholder="Nhập từ khóa tìm kiếm">
+                        <button type="submit" class="btn-search" data-toggle="button" aria-pressed="false" autocomplete="off"><img src="{{asset('assets/images/tim-kiem.jpg')}}" class="img-fluid" alt="Responsive image"></button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -25,9 +28,17 @@
                 </div>
                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                     <div class="row mx-0">
-                        <div class="col-lg-12 p-0">
-                            <img src="assets/images/quang-cao.png" class="img-fluid logo" alt="Responsive image">
-                        </div>
+                        @php
+                            $ads = App\Models\Slider::where(['IsActive' => 1, 'Type' => 'Advertise'])->orderBy('created_at','desc')->first();   
+
+                        @endphp
+                        @if(isset($ads))
+                            <div class="col-lg-12 p-0">
+                                <a href="{{$ads->Url}}">
+                                    <img src="{{asset('')}}/{{$ads->Img}}" class="img-fluid logo" alt="{{$ads->Name}}">
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

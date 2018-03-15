@@ -10,7 +10,7 @@
             <i class="fa fa-home"></i>
             <a href="{!!route('controller')!!}">Home</a>
         </li>
-        <li class="active">Slider</li>
+        <li class="active">Liên hệ</li>
     </ul>
 </div>
 <!-- /Page Breadcrumb -->
@@ -18,7 +18,7 @@
 <div class="page-header position-relative">
     <div class="header-title">
         <h1>
-            Danh sách Slider
+            Danh sách liên hệ
         </h1>
     </div>
     <!--Header Buttons-->
@@ -39,7 +39,7 @@
     <div class="col-xs-12 col-md-12">
         <div class="widget">
             <div class="widget-header bordered-bottom bordered-yellow">
-                <span class="widget-caption">Danh sách đơn hàng</span>              
+                <span class="widget-caption">Danh sách liên hệ</span>              
             </div>
             <div class="widget-body no-padding">
                 <table class="table table-bordered table-hover table-striped" id="searchable">

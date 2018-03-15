@@ -1,5 +1,5 @@
 @extends('control.master')
-@section('title',isset($item) ? 'Sửa Slider' : 'Thêm Slider')
+@section('title',(isset($item) ? 'Sửa Slider' : 'Thêm Slider'))
 @section('menu-left')
 {!!getMenuSidebar('slider') !!}
 @endsection
@@ -155,15 +155,6 @@
                                 <input type="url" name="Url" class="form-control" value="{{$item->Url or ''}}" title="Nhập đường dẫn" placeholder="Nhập đường dẫn">
                                 <div class="horizontal-space"></div>
                             </div>
-                           {{--  <div class="col-md-6">
-                                <span ><strong>Loại</strong></span>
-                                 <select class="form-control" name="Type">
-                                    <option value="Advertise">Quảng cáo</option>
-                                    <option value="Slider">Slider</option>
-                                    <option value="Popup">Popup</option>
-                                  </select>
-                                <div class="horizontal-space"></div>
-                            </div> --}}
                         </div>
                         <div class="row">
                             <div class="col-md-4">

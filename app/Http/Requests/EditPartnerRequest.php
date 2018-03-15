@@ -26,7 +26,7 @@ class EditPartnerRequest extends FormRequest
         return [
             'Img'               =>          'image',
             'Name'              =>          'required',
-            'Link'              =>          'url',
+            'Url'              =>          'url',
         ];
     }
     public function messages()
@@ -34,7 +34,7 @@ class EditPartnerRequest extends FormRequest
         return [
             'Img.image'         =>          'File không đúng định dạng',
             'Name.required'     =>          'Vui lòng nhập tên đối tác',
-            'Link.url'          =>          'Đường dẫn không đúng'
+            'Url.url'          =>          'Đường dẫn không đúng'
         ];
     }
 }

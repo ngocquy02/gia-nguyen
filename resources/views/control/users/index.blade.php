@@ -1,5 +1,5 @@
 @extends('control.master')
-@section('title','Danh sách sản phẩm')
+@section('title','Danh sách user')
 @section('menu-left')
 {!!getMenuSidebar('menu') !!}
 @endsection
@@ -53,57 +53,57 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr id="" class="getId">
-                                <td>
-                                    <label>
-                                        <input type="checkbox" class="check_del" idcheck="">
-                                        <span class="text"></span>
-                                    </label>
-                                </td>
-                                <td class=" sorting_1"></td>
-                                <td class=" ">
-                                    <label>
-                                        <input class="checkbox-slider colored-blue" type="checkbox" >
-                                        <span class="text IsActive" IsActive=""></span>
-                                    </label>
-                                </td>
-                                <td class=" ">
-                                    <label>
-                                        <input class="checkbox-slider colored-blue" type="checkbox" >
-                                        <span class="text IsHot" IsHot=""></span>
-                                    </label>
-                                </td>
-                                <td class="center "><button class="btn btn-warning  btn-circle btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="<img style='width:180px;height:180px;' src=''>"><i class="glyphicon glyphicon-camera"></i></button></td>
-                                
-                                <td class="center ">
-                                    <a href="" class="btn btn-info btn-xs edit" title="Thay đổi thông tin sản phẩm" style="margin-left: 10px;margin-right: 10px;">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                    <button class="btn btn-danger btn-xs delete" title="Xóa sản phẩm" data-toggle="modal" data-target="#modal-danger"><span class="fa fa-trash-o"></span></button>
-                                    <div id="modal-danger" class="modal modal-message modal-danger fade" style="display: none;" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                    <h4 class="modal-title">Cảnh báo!!!!</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Bạn có muốn xóa </p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                <form action="" method="post" accept-charset="utf-8">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="id" value="">
-                                                    <button type="submit" class="btn btn-primary ok">Đồng ý</button>
-                                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Hủy</button>
-                                                </form>
-                                                </div>
-                                            </div><!-- /.modal-content -->
-                                        </div><!-- /.modal-dialog -->
-                                                
-                                    </div>
-                                </td>
-                            </tr>
+                        @if($users->count()>0)
+                            @foreach($users as $user)
+                                <tr id="" class="getId">
+                                    <td>
+                                        <label>
+                                            <input class="check_del" idcheck="{{$user->id}}" type="checkbox">
+                                            <span class="text"></span>
+                                        </label>
+                                    </td>
+                                     <td class="sorting_1">
+                                       {{$user->FullName}} 
+                                    </td>
+                                    <td class=" sorting_2">
+                                       {{$user->Phone}}  
+                                    </td>
+                                    <td class=" sorting_3">
+                                       {{$user->Email}} 
+                                    </td>
+                                    <td class="center "><button class="btn btn-warning  btn-circle btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="<img style='width:180px;height:180px;' src=''>"><i class="glyphicon glyphicon-camera"></i></button></td>
+                                    
+                                    <td class="center ">
+                                        <a href="{{route('getEdit',['id'=>$user->id])}}" class="btn btn-info btn-xs edit" title="Thay đổi thông tin sản phẩm" style="margin-left: 10px;margin-right: 10px;">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                        <button class="btn btn-danger btn-xs delete" title="Xóa sản phẩm" data-toggle="modal" data-target="#modal-danger"><span class="fa fa-trash-o"></span></button>
+                                        <div id="modal-danger" class="modal modal-message modal-danger fade" style="display: none;" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                        <h4 class="modal-title">Cảnh báo!!!!</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Bạn có muốn xóa </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <form action="{{route('delUser')}}" method="post" accept-charset="utf-8">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="id" value="{{$user->id}}">
+                                                        <button type="submit" class="btn btn-primary ok">Đồng ý</button>
+                                                        <button type="button" class="btn btn-warning" data-dismiss="modal">Hủy</button>
+                                                    </form>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                                    
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                      {{-- {{$items->links()}} --}}
@@ -114,73 +114,4 @@
 </div>
     <!-- /Page Body -->
 </div>
-<script>
-$(document).ready(function(){
-    $.ajaxSetup({ headers: {  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} });
-    $('span.IsActive').click(function(){
-        var IsActive   =    $(this).attr('IsActive');
-        var id     =    $(this).parents('.getId').attr('id');
-        $.ajax({
-            url:'{{route('postActiveProduct')}}', 
-            type:'post',
-            cache:false,
-            data:{IsActive:IsActive,id:id},
-            dataType:'html',
-            success:function(msg){
-                if (msg=='off') {Notify('Đã ẩn sản phẩm', 'top-right', '5000', 'danger', 'fa-bolt', true);
-                    $('span.IsActive').attr('IsActive',0);
-                }
-                else{Notify('Đã bật hiển thị sản phẩm', 'top-right', '5000', 'success', 'fa-check', true);
-                    $('span.IsActive').attr('IsActive',1);
-                }
-            },
-            error:function(){ Notify('Lưu dữ liệu thất bại', 'top-right', '5000', 'danger', 'fa-bolt', true);}
-            });
-    }); 
-    $('span.IsHot').click(function(){
-        var IsHot   =    $(this).attr('IsHot');
-        var id     =    $(this).parents('.getId').attr('id');
-        $.ajax({
-            url:'{{route('postHotProduct')}}', 
-            type:'post',
-            cache:false,
-            data:{IsHot:IsHot,id:id},
-            dataType:'html',
-            success:function(msg){
-                if (msg=='off') {Notify('Đã tắt Nổi Bật', 'top-right', '5000', 'danger', 'fa-bolt', true);
-                    $('span.IsHot').attr('IsHot',0);
-                }
-                else{Notify('Đã bật Nổi Bật', 'top-right', '5000', 'success', 'fa-check', true);
-                    $('span.IsHot').attr('IsHot',1);
-                }                
-            },
-            error:function(){ Notify('Lưu dữ liệu thất bại', 'top-right', '5000', 'danger', 'fa-bolt', true);}
-            });
-        });
-    $('span.IsHome').click(function(){
-        var IsHome   =    $(this).attr('IsHome');
-        var id     =    $(this).parents('.getId').attr('id');
-        $.ajax({
-            url:'{{route('postSliderProduct')}}', 
-            type:'post',
-            cache:false,
-            data:{IsHome:IsHome,id:id},
-            dataType:'html',
-            success:function(msg){
-                if (msg=='off') {Notify('Đã tắt hiển thị Slider', 'top-right', '5000', 'danger', 'fa-bolt', true);
-                    $('span.IsHome').attr('IsHome',0);
-                }
-                else{Notify('Đã bật hiển thị Slider', 'top-right', '5000', 'success', 'fa-check', true);
-                    $('span.IsHome').attr('IsHome',0);
-                }
-            },
-            error:function(){ Notify('Lưu dữ liệu thất bại', 'top-right', '5000', 'danger', 'fa-bolt', true);}
-            });
-    });
-    $('.ok').click(function(){
-        $(this).css('display','none');
-    });
-});
-
-</script>
 @endsection

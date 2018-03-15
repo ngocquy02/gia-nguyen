@@ -44,21 +44,6 @@ class ArticleController extends Controller
     
     public function postAddArticle(ArticleRequest $request)
     {
-        $Tags = explode(",",$request->Tag); 
-        $tag_id = [];
-        for($i = 0; $i < count($Tags); $i ++){
-            $alias = str_slug($Tags[$i]);
-            if(!Tag::where(['Alias' => $alias])->first()){
-                Tag::insert(['name' => $Tags[$i],'Alias'=> $alias]);
-                $tag = Tag::where(['Alias' => $alias])->first(); 
-                array_push($tag_id,$tag->id);
-            }else{
-                $tag = Tag::where(['Alias' => $alias])->first(); 
-                array_push($tag_id,$tag->id);
-            }
-        
-        }
-        $data = json_encode($tag_id);
        
 
         $article =new Article;
@@ -72,7 +57,7 @@ class ArticleController extends Controller
         $article->Name            =     $request->Name; 
         $article->Alias           =     str_slug($request->Alias);
         $article->CatId           =     $request->CatId;
-        $article->IsHot           =     ($request->IsHot == 'on') ? 1 : 0;
+        $article->IsHot           =     0;
         $article->IsActive        =     ($request->IsActive == 'on') ? 1 : 0;
         $article->IsHome          =     0;
         $article->Idx             =     $IdxMax +1;
@@ -84,7 +69,7 @@ class ArticleController extends Controller
         $article->MetaTitle       =     $request->MetaTitle;
         $article->MetaDescription =     $request->MetaDescription;
         $article->MetaKeyword     =     $request->MetaKeyword;
-        $article->Tag     =     $data;
+        $article->Tag     =     0;
         $article->created_at      =     new DateTime();
         $article->updated_at      =     new DateTime();
 
@@ -97,17 +82,8 @@ class ArticleController extends Controller
     {
         $item=Article::find($id);
         $item2 = Article::all();
-        $tags = json_decode($item->Tag,true);
-
-        $tg =[];
-        // dd(count($tags));die;
-        for ($i=0; $i < count($tags) ; $i++) { 
-            $tag = Tag::find($tags[$i]); 
-            array_push($tg,$tag->Name);
-        }
-        $tag_name = implode(",",$tg);
         if(count($item2)>0){
-            return view('control.articles.article',['tags' =>$tag_name],compact('item'))->with('CatId',$item->CatId);
+            return view('control.articles.article',compact('item'))->with('CatId',$item->CatId);
         }
         else
         {
@@ -118,24 +94,7 @@ class ArticleController extends Controller
     }
     public function postEditArticle(EditArticleRequest $request)
     {
-        $Tags = explode(",",$request->Tag); 
-        $tag_id = [];
-        for($i = 0; $i < count($Tags); $i ++){
-            $alias = str_slug($Tags[$i]);
-            if(!Tag::where(['Alias' => $alias])->first()){
-                Tag::insert(['name' => $Tags[$i],'Alias'=> $alias]);
-                $tag = Tag::where(['Alias' => $alias])->first(); 
-                array_push($tag_id,$tag->id);
-            }else{
-                $tag = Tag::where(['Alias' => $alias])->first(); 
-                array_push($tag_id,$tag->id);
-            }
-        
-        }
-        $data = json_encode($tag_id);
-
-
-
+      
         $article =Article::find($request->id);
         // Upload hình ảnh
         if ($request->file('Img')) {
@@ -156,7 +115,7 @@ class ArticleController extends Controller
         $article->Name            =     $request->Name; 
         $article->Alias           =     str_slug($request->Alias);
         $article->CatId           =     $request->CatId;
-        $article->IsHot           =     ($request->IsHot == 'on') ? 1 : 0;
+        $article->IsHot           =      0;
         $article->IsActive        =     ($request->IsActive == 'on') ? 1 : 0;
         $article->IsHome        =     0;
         $article->ShortContent    =     $request->short_content;
@@ -165,7 +124,7 @@ class ArticleController extends Controller
         $article->MetaTitle       =     $request->MetaTitle;
         $article->MetaDescription =     $request->MetaDescription;
         $article->MetaKeyword     =     $request->MetaKeyword;
-        $article->Tag     =     $data;
+        $article->Tag     =     0;
         $article->updated_at      =     new DateTime();
 
         $article->save();

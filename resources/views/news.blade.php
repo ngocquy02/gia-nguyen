@@ -43,10 +43,10 @@
         <div class="clearfix"></div>
         @if ($items->lastPage() > 1)
             <ul class="pagination float-right">
-                @if($items->currentPage() != 1 && $items->lastPage() >= 5)
+                @if($items->currentPage() != 1 && $items->lastPage() >= 3)
                     <li>
                         <a href="{{ $items->url($items->url(1)) }}" aria-label="Previous">
-                            <span aria-hidden="true">Trang đầu</span>
+                            <span aria-hidden="true"><< Trang đầu</span>
                         </a>
                     </li>
                 @endif
@@ -73,10 +73,10 @@
                         </a>
                     </li>
                 @endif
-                @if ($items->currentPage() != $items->lastPage() && $items->lastPage() >= 5)
+                @if ($items->currentPage() != $items->lastPage() && $items->lastPage() >= 3)
                     <li>
                         <a href="{{ $items->url($items->lastPage()) }}" aria-label="Next">
-                            <span aria-hidden="true">Trang cuối</span>
+                            <span aria-hidden="true">Trang cuối >></span>
                         </a>
                     </li>
                 @endif
@@ -86,4 +86,9 @@
 </div>
 
 
+@endsection
+
+@section('sidebar')
+    @include('layouts/hotline-sidebar')
+    @include('layouts/news-sidebar')
 @endsection

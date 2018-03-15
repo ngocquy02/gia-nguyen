@@ -3,35 +3,40 @@
 <!-- Main Breadcrumb -->
 <!-- End Main Breadcrumb -->
 <!-- Main Content -->
-<div class="main-content">
-    <div class="container">
+<div class="list-sp">
+    <div class="header-list-sp">
         <div class="row">
-            <div class="main-breadcrumb">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <ol class="breadcrumb">
-                                <li><a href="#">Trang chủ</a></li>
-                                <li class="active">{{$RootName}}</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="article">
-                @if($item)
-                    <h1 class="article-name">{!!$item->Name!!}</h1>
-                    <div class="article-content">
-                        {!!$item->Content!!}
-                    </div>
-                @else
-                    <code>Giới thiệu công ty đang cập nhật!</code>
-                @endif
+            <div class="col-xs-12 col-sm-6 col-md-9 col-lg-9">
+                <div class="header-name">
+                    @php
+                        $Cat = App\Models\Category::where(['Alias' =>$root])->first();
+                        $about = App\Models\Article::where(['CatId' => $Cat->id])->first();         
+                    @endphp
+                    <h2 class="m-0 p-0">
+                        <a href="" title="">
+                            TRANG CHỦ &#x3E; GIỚI THIỆU
+                        </a>
+                    </h2>
                 </div>
             </div>
         </div>
     </div>
+    <div class="clearfix"></div>
+    <div class="content-list-sp">
+        @if(isset($about))
+            {!!$about->Content!!}
+        @else
+            <code>Chưa có giới thiệu </code>
+        @endif
+
+
+    </div>
+    <div class="clearfix"></div>  
 </div>
 <!-- End Main Content -->
+@endsection
+
+@section('sidebar')
+    @include('layouts/hotline-sidebar')
+    @include('layouts/news-sidebar')
 @endsection

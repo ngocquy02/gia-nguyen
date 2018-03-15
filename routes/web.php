@@ -209,13 +209,21 @@ Route::group(['middleware' => 'auth'], function () {
         // Trang xử lý thông tin user
         Route::group(['prefix' => 'user'], function() {
             Route::get('show/{role}','UserController@showRole')->name('role-user');
-            Route::get('/', function() {
-                return view('control.users.index');
-            });
             Route::get('register', ['as'=>'getRegister','uses' => 'UserController@getRegister']);
             Route::post('register', ['as'=>'postRegister','uses' => 'UserController@postRegister']);
             Route::get('edit/{id}', ['as'=>'getEdit','uses' => 'UserController@getEdit'])->where(['id'=>'[0-9]+']);
             Route::post('edit', ['as'=>'postEdit','uses' => 'UserController@postEdit']);
+            Route::post('del', ['as'=>'delUser','uses' => 'UserController@delUser']);
+        });
+        // Trang xủ lý hotline
+        Route::group(['prefix' => 'hotline'],function(){
+            Route::get('/','HotlineController@getHotline')->name('getHotline');
+            Route::get('/edit/{id}','HotlineController@getHotlineId')->name('getHotlineId');
+            Route::get('/add','HotlineController@getAddHotline')->name('getAddHotline');
+            Route::post('postActiveHotline','HotlineController@postActiveHotline')->name('postActiveHotline');
+            Route::post('postAddHotline','HotlineController@postAddHotline')->name('postAddHotline');
+            Route::post('postEditHotline','HotlineController@postEditHotline')->name('postEditHotline');
+            Route::post('postHotlineDel','HotlineController@postHotlineDel')->name('postHotlineDel');
         });
         //Cập nhật Sitemap
         Route::get('sitemap',['as'=>'getSitemap','uses' => 'ControlController@getSitemap']);

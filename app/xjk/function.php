@@ -145,7 +145,7 @@ function subMenu($data,$ParentId=0,$active='')
 		$id=$value['id'];		
 		if($value['ParentID']==$ParentId)
 		{
-			$icon=($value['Level']!=0 and $value['Icon']=='') ? '> ':'';
+			$icon=($value['Level']!=0 and $value['Icon']=='') ? '&#x3E;&nbsp;':'';
 			echo '<li '.$flagActive.'><a href="'.(($value['Type']==1)? "": getLinkById($value['id'])).'">'.$icon.$value['Name'].'</a>';
 			subMenu($data,$id);
 		    echo '</li>';
@@ -208,6 +208,14 @@ function getMenuSidebar($active='')
         </a>
     </li>
     <li class="';
+    $sidebar.=($active=='hotline') ? 'active' : "";
+    $sidebar.='">
+        <a href="'.route('getHotline').'">
+            <i class="fa fa-phone"></i>
+            <span class="menu-text"> QUẢN LÝ HOTLINE</span>
+        </a>
+    </li>
+    <li class="';
     $sidebar.=($active=='slider') ? 'active' : "";
     $sidebar.='">
         <a href="" class="menu-dropdown">
@@ -219,9 +227,6 @@ function getMenuSidebar($active='')
         <ul class="submenu" style="display: none;">
 			<li>
 				<a href="'.route("getAds").'">Quảng cáo</a>
-			</li>
-			<li>
-				<a href="'.route("getPopup").'">Popup</a>
 			</li>
 			<li>
 				<a href="'.route("getSliders").'">Slider</a>
@@ -236,39 +241,13 @@ function getMenuSidebar($active='')
             <span class="menu-text"> QUẢN LÝ ĐỐI TÁC</span>
         </a>
     </li>
-    <li class="';
-    $sidebar.=($active=='account') ? 'active' : "";
-    $sidebar.='">
-        <a href="'.route('getAccountAdmin').'">
-            <i class="fa fa-diamond"></i>
-            <span class="menu-text"> QUẢN LÝ THÀNH VIÊN</span>
-        </a>
-    </li>
-    <li class="';
-    $sidebar.=($active=='cart') ? 'active' : "";
-    $sidebar.='">
-        <a href="'.route('getCartControl').'">
-            <i class="fa fa-shopping-cart"></i>
-            <span class="menu-text"> QUẢN LÝ GIỎ HÀNG</span>
-        </a>
-    </li>
    <li class="';
     $sidebar.=($active=='admin') ? 'active' : "";
     $sidebar.='">
-        <a href="" class="menu-dropdown">
+        <a href="'.route("role-user",['role'=>1]).'">
             <i class="fa fa-user"></i>
             <span class="menu-text"> QUẢN LÝ USER </span>
-            <i class="menu-expand"></i>
-             
         </a>
-        <ul class="submenu" style="display: none;">
-			<li>
-				<a href="'.route("role-user",['role'=>1]).'">Admintrator</a>
-			</li>
-			<li>
-				<a href="'.route("role-user",['role'=>2]).'">User</a>
-			</li>
-        </ul>
     </li>
     <li class="';
     $sidebar.=($active=='contact') ? 'active' : "";
@@ -278,25 +257,8 @@ function getMenuSidebar($active='')
             <span class="menu-text"> QUẢN LÝ LIÊN HỆ</span>
         </a>
     </li>
-    <li class="';
-    $sidebar.=($active=='contact') ? 'active' : "";
-    $sidebar.='">
-         <a href="" class="menu-dropdown">
-            <i class="fa fa-qrcode"></i>
-            <span class="menu-text"> QUẢN LÝ SẢN PHẨM </span>
-            <i class="menu-expand"></i>
-             
-        </a>
-        <ul class="submenu" style="display: none;">
-			';
-echo $sidebar;
-	foreach ($category as $value) {
-		echo "<li><a href=".route('getProductsByCatId',['CatId'=>$value->id]).">$value->Name</a></li>";
-	}
-echo '
-        </ul>
-    </li>
 </ul>';
+	echo $sidebar;
 }
 
 function catchuoi($chuoi,$gioihan){

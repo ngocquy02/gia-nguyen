@@ -183,3 +183,11 @@ footer .copyright .float-right > img{display: inline-block;margin: 0 5px;}
 ul {list-style: none;}
 .product-name > h3 > a:hover{text-decoration: none;color: #fe5f01;}
 .product-name > .xem-them:hover a{background-color: #fe5f01;text-decoration: none;}
+
+.content-list-sp img{
+	width: 100%;
+}
+
+.contact{
+	margin-bottom: 15px;
+}

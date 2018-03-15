@@ -1,5 +1,5 @@
 @extends('control.master')
-@section('title','Danh sách hiển thị ảnh Slider')
+@section('title',($type)=='Advertise'?'Danh sách quảng cáo':'Danh sách slide')
 @section('menu-left')
 {!!getMenuSidebar('slider') !!}
 @endsection

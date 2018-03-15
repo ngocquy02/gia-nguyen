@@ -54,11 +54,10 @@
                                     <span class="text"></span>
                                 </label>
                             </th>
-                            <th>Mã Đối tác</th>
                             <th>Tên</th>
-                            <th>Hoạt động</th>
+                            <th>Đường dẫn</th>
+                            <th>Hình ảnh</th>
                             <th>Trạng thái</th>
-                            <th>Số tiền</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
@@ -72,12 +71,12 @@
                                     <span class="text"></span>
                                 </label>
                             </td>
-                            <td>{!!$item->Code!!}</td>
-                            <td>{!!$item->FullName!!}</td>
+                            <td>{!!$item->Name!!}</td>
                             <td>
-                                <label>
-                                    @if($item->IsOnline == 1) {{ 'On'}} @else {{'Off'}} @endif
-                                </label>
+                               {{$item->Url}}
+                            </td>
+                            <td>
+                                <button class="btn btn-warning  btn-circle btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="<img style='width:180px;height:180px;' src='{{$item->Img}}'>"><i class="glyphicon glyphicon-camera"></i></button>    
                             </td>
                             <td>
                                 <label>
@@ -85,7 +84,6 @@
                                     <span class="text IsActive" IsActive="{!!$item->IsActive!!}"></span>
                                 </label>
                             </td>
-                            <td>{{number_format($item->Coin,0,',','.')}}</td>
                             <td class="center ">
                                 <a href="{!!route('getEditPartner',['id'=>$item->id])!!}" class="btn btn-info btn-xs edit" title="Sửa thông tin đối tác" style="margin-left: 10px;margin-right: 10px;">
                                     <span class="fa fa-edit"></span>
@@ -193,10 +191,10 @@ $(document).ready(function(){
             data:{IsActive:IsActive,id:id},
             dataType:'html',
             success:function(msg){
-                if (msg=='off') {Notify('Đã tắt tài khoản', 'top-right', '5000', 'danger', 'fa-bolt', true);
+                if (msg=='off') {Notify('Đã ẩn đối tác', 'top-right', '5000', 'danger', 'fa-bolt', true);
                     $('span.IsActive').attr('IsActive',0);
                 }
-                else{Notify('Đã bật tài khoản', 'top-right', '5000', 'success', 'fa-check', true);
+                else{Notify('Đã hiển thị đối tác', 'top-right', '5000', 'success', 'fa-check', true);
                     $('span.IsActive').attr('IsActive',1);
                 }                
             },

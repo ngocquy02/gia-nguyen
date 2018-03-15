@@ -35,83 +35,82 @@
 <!-- /Page Header -->
 <!-- Page Body -->
 <div class="page-body">
-<style>.DTTT.btn-group{display: none !important;}</style>
-<div class="row">
-    <div class="col-xs-12 col-md-12">
-        <div class="widget">
-            <div class="widget-header bordered-bottom bordered-yellow">
-                <span class="widget-caption">Danh sách sản phẩm</span>
-            </div>
-            <div class="widget-body no-padding">
-                <table class="table table-bordered table-hover table-striped" id="searchable">
-                    <thead class="bordered-darkorange">
-                        <tr role="row">
-                            <th>Tên</th>
-                            <th>Hình ảnh</th>
-                            <th>Ẩn/ Hiện</th>
-                            {{-- <th>Loại chiều</th> --}}
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @if( isset($items) && count($items) > 0)
-                        @foreach($items as $item)
-                        <tr id="{{$item->id}}" class="getId">
-                            <td class=" sorting_1">{{ $item->Name}}</td>
-                            <td class="center ">
-                                <img src="{{$item->Img}}" style="width:200px">
-                            </td>
-                            <td class=" ">
-                                <label>
-                                    <input class="checkbox-slider colored-blue" type="checkbox" @if($item->IsActive == 1) {{ 'checked="checked"'}} @endif>
-                                    <span class="text IsActive" IsActive="{!!$item->IsActive!!}"></span>
-                                </label>
-                            </td>
-                            {{-- <td class="center ">
-                                <label>{{($item->IsHome==0)? '1 Chiều' :'2 Chiều'}}</label>
-                            </td> --}}
-                            <td class="center ">
-                                <a href="{!!route('getProduct',['id'=>$item->id])!!}" class="btn btn-info btn-xs edit" title="Thay đổi thông tin sản phẩm" style="margin-left: 10px;margin-right: 10px;">
-                                    <span class="fa fa-edit"></span>
-                                </a>
-                                <button class="btn btn-danger btn-xs delete" title="Xóa sản phẩm" data-toggle="modal" data-target="#modal-danger{!!$item->id!!}"><span class="fa fa-trash-o"></span></button>
-                                <div id="modal-danger{!!$item->id!!}" class="modal modal-message modal-danger fade" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h4 class="modal-title">Cảnh báo!!!!</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Bạn có muốn xóa {{$item->Name}}</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                            <form action="{{route('postProductDel')}}" method="post" accept-charset="utf-8">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="id" value="{{$item->id}}">
-                                                <button type="submit" class="btn btn-primary ok">Đồng ý</button>
-                                                <button type="button" class="btn btn-warning" data-dismiss="modal">Hủy</button>
-                                            </form>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                            
-                                </div>
-                            </td>
-                        </tr>
-                            
-                        @endforeach
-                    @endif
-                    </tbody>
-                </table>
-                {{$items->links()}}
+    <style>.DTTT.btn-group{display: none !important;}</style>
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header bordered-bottom bordered-yellow">
+                    <span class="widget-caption">Danh sách sản phẩm</span>
+                </div>
+                <div class="widget-body no-padding">
+                    <table class="table table-bordered table-hover table-striped" id="searchable">
+                        <thead class="bordered-darkorange">
+                            <tr role="row">
+                                <th>Tên</th>
+                                <th>Hình ảnh</th>
+                                <th>Ẩn/ Hiện</th>
+                                {{-- <th>Loại chiều</th> --}}
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @if( isset($items) && count($items) > 0)
+                            @foreach($items as $item)
+                            <tr id="{{$item->id}}" class="getId">
+                                <td class=" sorting_1">{{ $item->Name}}</td>
+                                <td class="center ">
+                                    <img src="{{$item->Img}}" style="width:200px">
+                                </td>
+                                <td class=" ">
+                                    <label>
+                                        <input class="checkbox-slider colored-blue" type="checkbox" @if($item->IsActive == 1) {{ 'checked="checked"'}} @endif>
+                                        <span class="text IsActive" IsActive="{!!$item->IsActive!!}"></span>
+                                    </label>
+                                </td>
+                                {{-- <td class="center ">
+                                    <label>{{($item->IsHome==0)? '1 Chiều' :'2 Chiều'}}</label>
+                                </td> --}}
+                                <td class="center ">
+                                    <a href="{!!route('getProduct',['id'=>$item->id])!!}" class="btn btn-info btn-xs edit" title="Thay đổi thông tin sản phẩm" style="margin-left: 10px;margin-right: 10px;">
+                                        <span class="fa fa-edit"></span>
+                                    </a>
+                                    <button class="btn btn-danger btn-xs delete" title="Xóa sản phẩm" data-toggle="modal" data-target="#modal-danger{!!$item->id!!}"><span class="fa fa-trash-o"></span></button>
+                                    <div id="modal-danger{!!$item->id!!}" class="modal modal-message modal-danger fade" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h4 class="modal-title">Cảnh báo!!!!</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Bạn có muốn xóa {{$item->Name}}</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                <form action="{{route('postProductDel')}}" method="post" accept-charset="utf-8">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="id" value="{{$item->id}}">
+                                                    <button type="submit" class="btn btn-primary ok">Đồng ý</button>
+                                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Hủy</button>
+                                                </form>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                                
+                                    </div>
+                                </td>
+                            </tr>
+                                
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                    {{$items->links()}}
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
     <!-- /Page Body -->
-</div>
 <script>
 $(document).ready(function(){
     $.ajaxSetup({ headers: {  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} });
