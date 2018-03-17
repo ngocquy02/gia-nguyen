@@ -13,6 +13,7 @@ use File;
 use DateTime;
 use DB;
 use Image;
+Use Auth;
 
 class ProductController extends Controller
 {
@@ -151,8 +152,8 @@ class ProductController extends Controller
         $product->IsHome          =     0;
         $product->Idx             =     $IdxMax;
         $product->Img             =     $file_name;
-        $product->CreateBy        =     1;
-        $product->UpdateBy        =     1;
+        $product->CreateBy        =     Auth::guard('web')->user()->id;
+        $product->UpdateBy        =     Auth::guard('web')->user()->id;
         $product->Locale          =     'vi-vn';
         $product->created_at      =     new DateTime();
         $product->updated_at      =     new DateTime();
@@ -188,7 +189,7 @@ class ProductController extends Controller
         $product->IsHot           =    0;
         $product->IsActive        =     ($request->IsActive == 'on') ? 1 : 0;
         $product->IsHome            =    0;
-        $product->UpdateBy        =     1;
+        $product->UpdateBy        =     Auth::guard('web')->user()->id;
         $product->updated_at      =     new DateTime();
 
         $product->save();

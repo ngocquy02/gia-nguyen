@@ -132,5 +132,4 @@
 </script>
 @endsection
 @section('sidebar')
-    @include('layouts/hotline-sidebar')
 @endsection

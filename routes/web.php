@@ -10,11 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-     Route::get('/dowload?path={path}',function($path){
-            echo $path;
-            // return response()->download($pathToFile);
-    });
 
+    Route::Post('cart/add',['as'=>'myRoute', 'uses'=>'LoginController@ex', 'middleware'=>'no_csrf']);
     // đăng nhập vào quản trị
     Route::get('xjk-control/login', ['as'=>'login','uses' => 'LoginController@login']);
     Route::post('xjk-control/login', ['as'=>'postLogin','uses' => 'LoginController@postLogin']);

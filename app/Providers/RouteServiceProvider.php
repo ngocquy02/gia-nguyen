@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'App\Http\Controllers';
 
+
+
+ protected $except = [
+        'http://localhost/Admin-XJK/public/cart/add',
+    ];
     /**
      * Define your route model bindings, pattern filters, etc.
      *

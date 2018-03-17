@@ -12,6 +12,7 @@ use App\Http\Requests\EditArticleRequest;
 use File;
 use DateTime;
 use Image;
+use Auth;
 
 class ArticleController extends Controller
 {
@@ -64,8 +65,8 @@ class ArticleController extends Controller
         $article->Img             =     $file_name;
         $article->ShortContent    =     $request->short_content;
         $article->Content         =     $request->content;
-        $article->CreateBy        =     1;
-        $article->UpdateBy        =     1;
+        $article->CreateBy        =     Auth::guard('web')->user()->id;
+        $article->UpdateBy        =     Auth::guard('web')->user()->id;
         $article->MetaTitle       =     $request->MetaTitle;
         $article->MetaDescription =     $request->MetaDescription;
         $article->MetaKeyword     =     $request->MetaKeyword;
@@ -120,7 +121,7 @@ class ArticleController extends Controller
         $article->IsHome        =     0;
         $article->ShortContent    =     $request->short_content;
         $article->Content         =     $request->content;
-        $article->UpdateBy        =     1;
+        $article->UpdateBy        =     Auth::guard('web')->user()->id;
         $article->MetaTitle       =     $request->MetaTitle;
         $article->MetaDescription =     $request->MetaDescription;
         $article->MetaKeyword     =     $request->MetaKeyword;
@@ -273,7 +274,7 @@ class ArticleController extends Controller
         if ($request->ajax()) {
         $article =Article::find($request->id);
         $article->IsSlider        =     ($request->IsSlider==0) ? 1 : 0;
-        $article->UpdateBy        =     1;
+        $article->UpdateBy        =     Auth::guard('web')->user()->id;
         $article->updated_at      =     new DateTime();
 
         $article->save();

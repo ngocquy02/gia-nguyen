@@ -39,6 +39,48 @@
         </ul>
     </div>
     <div class="clearfix"></div>
+
+    {{-- Thương mại xuất nhập khẩu --}}
+    <div class="dm-sp">
+        <span>TM - Xuất nhập khẩu</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="list-dm">
+       {{--  <ul class="p-0">
+            @php
+                $listCatLeft1=App\Models\Category::select('id','Alias', 'Name')
+                                                ->where([
+                                                    ['IsActive','=',1],
+                                                    ['Level','=',1],
+                                                    ['Type','=',3],['Alias' ,'=','thuong-mai-xuat-nhap-khau']
+                                                    ])
+                                                ->orderBy('Idx')
+                                                ->get();
+            @endphp
+            @if($listCatLeft1->count() > 0)
+                @foreach($listCatLeft1 as $listCatLeft1)
+                    @php
+                        $listCatLeftChildren1=App\Models\Category::select('id','Alias', 'Name')->where([['IsActive','=',1],['Level','=',2],['ParentID','=', $listCatLeft1->id],['Type','=',3]])->orderBy('Idx')->get();
+                    @endphp
+                    @if($listCatLeftChildren1->count() > 0)
+                    <li>
+                       <h3><a href="{!!$listCatLeft1->Alias!!}">{!!$listCatLeft1->Name!!}<span class="fa fa-caret-right"></span></a></h3>
+                        <ul class="cc-list-child">
+                            @foreach($listCatLeftChildren1 as $listCatLeftChildren1)
+                            <li><h4><a href="{!!getLinkById($listCatLeftChildren1->id)!!}">&#x3E;&nbsp;{!!$listCatLeftChildre1n->Name!!}</a></h4></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    @else
+                        <li><h4><a href="{!!getLinkById($listCatLeft1->id)!!}">{!!$listCatLeft1->Name!!}</a></h4></li>
+                    @endif
+                @endforeach
+            @else
+                <code>Danh mục sản phẩm đang cập nhật</code>
+            @endif
+        </ul> --}}
+    </div>
+    <div class="clearfix"></div>
     @include('layouts/hotline-sidebar')
     
     <div class="clearfix"></div>

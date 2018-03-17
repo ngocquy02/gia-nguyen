@@ -57,6 +57,5 @@
 </div>
 @endsection()
 @section('sidebar')
-    @include('layouts/hotline-sidebar')
     @include('layouts/news-sidebar')
 @endsection

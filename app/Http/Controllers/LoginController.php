@@ -15,6 +15,12 @@ class LoginController extends Controller
     // {
     //     $this->middleware('auth', ['except' => 'logout']);
     // }   
+    // 
+    
+    public function ex(Request $res){
+        dd($res);
+    }
+
     public function postLogout()
     {
        Auth::logout();
